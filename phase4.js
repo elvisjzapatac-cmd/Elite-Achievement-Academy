@@ -6,7 +6,7 @@
   const cfg = window.EAA_SUPABASE_CONFIG || {};
   const ready = window.supabase && cfg.url && cfg.anonKey && !String(cfg.url).includes('YOUR_PROJECT') && !String(cfg.anonKey).includes('YOUR_SUPABASE');
   const db = ready ? window.supabase.createClient(cfg.url, cfg.anonKey) : null;
-  let user = null, profile = null, rows = [], mode = 'register', answers = [], savedQuiz = false, recoveryMode = false;
+  let user = null, profile = null, rows = [], mode = 'register', answers = [], savedQuiz = false, recoveryMode = (window.location.hash.includes('type=recovery') || new URLSearchParams(window.location.search).get('type') === 'recovery');
   const $ = id => document.getElementById(id);
   const es = () => document.documentElement.lang !== 'en';
   const safe = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -21,9 +21,14 @@
     document.querySelectorAll('[data-account-i18n="eyebrow"]').forEach(e=>e.textContent=t.welcome);
     document.querySelectorAll('[data-account-i18n="title"]').forEach(e=>e.textContent=t.title);
     if(!db){area.innerHTML=`<p class="account-message" role="status">${safe(t.notConfigured)}</p><p class="account-small-note">${safe(t.note)}</p>`;renderDashboard();return;}
+    if(recoveryMode && !user){
+      area.innerHTML=`<div class="account-tabs"><button type="button" class="active">${safe(t.resetTitle)}</button></div><p class="account-message" role="status">${safe(es()?'El enlace llegó, pero no se pudo validar la sesión de recuperación. Solicita un enlace nuevo y ábrelo desde el mismo navegador.':'The link opened, but the recovery session could not be validated. Request a new link and open it in the same browser.')}</p><button class="button button-small" type="button" id="phase4RecoveryBack">${safe(t.backLogin)}</button>`;
+      $('phase4RecoveryBack').addEventListener('click',()=>{recoveryMode=false;window.history.replaceState({},document.title,window.location.pathname+window.location.search);mode='login';renderAccount();});
+      return;
+    }
     if(recoveryMode && user){
       area.innerHTML=`<div class="account-tabs"><button type="button" class="active">${safe(t.resetTitle)}</button></div><form id="phase4PasswordForm" class="account-form"><label>${safe(t.newPassword)}<input name="newPassword" type="password" autocomplete="new-password" minlength="8" maxlength="100" required></label><button class="button" type="submit">${safe(t.savePassword)}</button></form><p class="account-message" id="phase4AccountMessage" role="status">${safe(message)}</p>`;
-      $('phase4PasswordForm').addEventListener('submit',async ev=>{ev.preventDefault();const form=ev.currentTarget,btn=form.querySelector('button[type="submit"]'),out=$('phase4AccountMessage'),password=String(new FormData(form).get('newPassword')||'');if(password.length<8){out.textContent=t.weak;return;}btn.disabled=true;out.textContent=t.working;try{const {error}=await db.auth.updateUser({password});if(error)throw error;recoveryMode=false;await loadProfile();renderAccount(t.passwordUpdated);}catch(err){out.textContent=err?.message||t.profileError;}finally{if(document.body.contains(btn))btn.disabled=false;}});
+      $('phase4PasswordForm').addEventListener('submit',async ev=>{ev.preventDefault();const form=ev.currentTarget,btn=form.querySelector('button[type="submit"]'),out=$('phase4AccountMessage'),password=String(new FormData(form).get('newPassword')||'');if(password.length<8){out.textContent=t.weak;return;}btn.disabled=true;out.textContent=t.working;try{const {error}=await db.auth.updateUser({password});if(error)throw error;recoveryMode=false;try{window.history.replaceState({},document.title,window.location.pathname+window.location.search);}catch(_){}await loadProfile();renderAccount(t.passwordUpdated);}catch(err){out.textContent=err?.message||t.profileError;}finally{if(document.body.contains(btn))btn.disabled=false;}});
       return;
     }
     if(user && !profile){
@@ -101,6 +106,6 @@
   // Override the prototype's local-only account UI before the page is interactive.
   renderAccountArea=renderAccount;
   syncRoleSelector();
-  if(db){db.auth.getSession().then(async({data})=>{user=data.session?.user||null;await loadProfile();renderAccount();await loadProgress();if(typeof renderPortal==='function')renderPortal();});db.auth.onAuthStateChange((event,session)=>{Promise.resolve().then(async()=>{if(event==='PASSWORD_RECOVERY')recoveryMode=true;user=session?.user||null;await loadProfile();renderAccount();await loadProgress();if(typeof renderPortal==='function')renderPortal();});});}
+  if(db){db.auth.getSession().then(async({data})=>{user=data.session?.user||null;await loadProfile();renderAccount();await loadProgress();if(typeof renderPortal==='function')renderPortal();});db.auth.onAuthStateChange((event,session)=>{Promise.resolve().then(async()=>{if(event==='PASSWORD_RECOVERY'){recoveryMode=true;mode='login';}user=session?.user||null;await loadProfile();renderAccount();await loadProgress();if(typeof renderPortal==='function')renderPortal();});});}
   renderAccount();renderDashboard();
 })();
