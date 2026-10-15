@@ -66,7 +66,7 @@ function applyLanguage() {
   $("quizHint").textContent = translations[lang].quizHint;
   renderQuestion();
 }
-$("languageToggle").addEventListener("click", () => { lang = lang === "es" ? "en" : "es"; applyLanguage(); renderPortal(); $("assignmentInput").placeholder = translations[lang].assignmentPlaceholder; });
+$("languageToggle").addEventListener("click", () => { lang = lang === "es" ? "en" : "es"; applyLanguage(); renderPortal(); renderAccountArea(); $("assignmentInput").placeholder = translations[lang].assignmentPlaceholder; });
 $("levelFilter").addEventListener("change", e => {
   const value = e.target.value;
   document.querySelectorAll(".subject-card").forEach(card => card.classList.toggle("hidden-card", value !== "all" && !card.dataset.levels.split(" ").includes(value)));
@@ -193,6 +193,33 @@ function renderTasks() {
   list.innerHTML = tasks.map(task => `<li class="${task.done ? "done" : ""}"><input type="checkbox" data-task-id="${task.id}" ${task.done ? "checked" : ""} aria-label="${lang === "es" ? "Marcar tarea" : "Mark task"}"><span>${escapeHTML(task.text)}</span><button type="button" class="task-remove" data-remove-task="${task.id}" aria-label="${lang === "es" ? "Eliminar tarea" : "Remove task"}">×</button></li>`).join("");
 }
 function escapeHTML(value) { return String(value).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;", "'":"&#39;"}[c])); }
+// Phase 3: local prototype of student and teacher profiles.
+// Production authentication requires a secure server and database; this is only a GitHub Pages demo.
+const ACCOUNT_KEY = "eaa-phase3-demo-accounts-v1";
+const SESSION_KEY = "eaa-phase3-demo-session-v1";
+let accountMode = "register";
+const accountCopy = {
+ es:{eyebrow:"TU CUENTA",title:"Crea tu perfil o inicia sesión",register:"Crear cuenta",login:"Iniciar sesión",name:"Nombre completo",email:"Correo electrónico",password:"Contraseña",role:"Tipo de perfil",student:"Estudiante",teacher:"Profesor/a",grade:"Nivel académico",submitRegister:"Crear mi cuenta",submitLogin:"Entrar",switchLogin:"¿Ya tienes cuenta? Inicia sesión",switchRegister:"¿No tienes cuenta? Regístrate",logout:"Cerrar sesión",welcome:"¡Bienvenido/a!",emailLabel:"Correo",roleLabel:"Perfil",gradeLabel:"Nivel",exists:"Ya existe una cuenta con ese correo en este navegador.",missing:"Completa todos los campos.",invalidEmail:"Escribe un correo electrónico válido.",weakPassword:"La contraseña debe tener al menos 8 caracteres.",badLogin:"Correo o contraseña incorrectos.",registered:"Cuenta de demostración creada.",secureContext:"Abre esta página mediante HTTPS (GitHub Pages) o localhost.",logoutMessage:"Has cerrado sesión.",note:"Prototipo: el perfil solo existe en este navegador y no se sincroniza entre dispositivos. No uses datos personales reales."},
+ en:{eyebrow:"YOUR ACCOUNT",title:"Create your profile or sign in",register:"Create account",login:"Sign in",name:"Full name",email:"Email address",password:"Password",role:"Profile type",student:"Student",teacher:"Teacher",grade:"Academic level",submitRegister:"Create my account",submitLogin:"Sign in",switchLogin:"Already have an account? Sign in",switchRegister:"No account yet? Register",logout:"Sign out",welcome:"Welcome!",emailLabel:"Email",roleLabel:"Profile",gradeLabel:"Grade",exists:"An account with this email already exists in this browser.",missing:"Please complete every field.",invalidEmail:"Enter a valid email address.",weakPassword:"Password must have at least 8 characters.",badLogin:"Incorrect email or password.",registered:"Demo account created.",secureContext:"Open this page over HTTPS (GitHub Pages) or localhost.",logoutMessage:"You have signed out.",note:"Prototype only: this profile exists in this browser and does not sync across devices. Do not use real personal data."}
+};
+function accountList(){try{const a=JSON.parse(localStorage.getItem(ACCOUNT_KEY)||"[]");return Array.isArray(a)?a:[]}catch{return[]}}
+function currentAccount(){try{const email=localStorage.getItem(SESSION_KEY);return email?accountList().find(a=>a.email===email)||null:null}catch{return null}}
+function accountGradeOptions(selected="") {return Array.from($("gradeSelect").options).map(o=>`<option value="${escapeHTML(o.textContent)}" ${o.textContent===selected?"selected":""}>${escapeHTML(o.textContent)}</option>`).join("")}
+function renderAccountArea(message="") {
+ const area=$("accountArea");if(!area)return;const t=accountCopy[lang]||accountCopy.es;
+ document.querySelectorAll("[data-account-i18n='eyebrow']").forEach(e=>e.textContent=t.eyebrow);document.querySelectorAll("[data-account-i18n='title']").forEach(e=>e.textContent=t.title);
+ const user=currentAccount();
+ if(user){area.innerHTML=`<div class="account-profile"><div class="account-avatar">${escapeHTML((user.name||"A").trim().charAt(0).toUpperCase())}</div><div class="account-profile-copy"><h4>${t.welcome} ${escapeHTML(user.name)}</h4><p>${t.note}</p></div></div><dl class="account-details"><div><dt>${t.emailLabel}</dt><dd>${escapeHTML(user.email)}</dd></div><div><dt>${t.roleLabel}</dt><dd>${user.role==="teacher"?t.teacher:t.student}</dd></div><div><dt>${t.gradeLabel}</dt><dd>${escapeHTML(user.grade)}</dd></div></dl><button class="button button-small" type="button" id="accountLogout">${t.logout}</button>${message?`<p class="account-message" role="status">${escapeHTML(message)}</p>`:""}`;$("accountLogout").addEventListener("click",()=>{localStorage.removeItem(SESSION_KEY);renderAccountArea(t.logoutMessage)});return}
+ const registering=accountMode==="register";
+ area.innerHTML=`<div class="account-tabs"><button type="button" class="${registering?"active":""}" data-account-mode="register">${t.register}</button><button type="button" class="${!registering?"active":""}" data-account-mode="login">${t.login}</button></div><form id="accountForm" class="account-form" novalidate>${registering?`<label>${t.name}<input name="name" autocomplete="name" maxlength="70" required></label>`:""}<label>${t.email}<input name="email" type="email" autocomplete="email" maxlength="160" required></label><label>${t.password}<input name="password" type="password" autocomplete="${registering?"new-password":"current-password"}" minlength="8" maxlength="100" required></label>${registering?`<div class="account-form-row"><label>${t.role}<select name="role"><option value="student">${t.student}</option><option value="teacher">${t.teacher}</option></select></label><label>${t.grade}<select name="grade">${accountGradeOptions($("gradeSelect").value)}</select></label></div>`:""}<button class="button" type="submit">${registering?t.submitRegister:t.submitLogin}</button></form><p class="account-switch"><button type="button" data-account-mode="${registering?"login":"register"}">${registering?t.switchLogin:t.switchRegister}</button></p><p class="account-message" id="accountMessage" role="status">${escapeHTML(message)}</p><p class="account-small-note">${t.note}</p>`;
+ area.querySelectorAll("[data-account-mode]").forEach(b=>b.addEventListener("click",()=>{accountMode=b.dataset.accountMode;renderAccountArea()}));
+ $("accountForm").addEventListener("submit",async e=>{e.preventDefault();const d=new FormData(e.currentTarget),name=String(d.get("name")||"").trim(),email=String(d.get("email")||"").trim().toLowerCase(),password=String(d.get("password")||""),role=String(d.get("role")||"student"),grade=String(d.get("grade")||"");const out=$("accountMessage"),show=m=>{if(out)out.textContent=m};
+ if(!email||!password||(registering&&(!name||!grade))){show(t.missing);return}if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){show(t.invalidEmail);return}if(password.length<8){show(t.weakPassword);return}if(!window.crypto?.subtle||!window.isSecureContext){show(t.secureContext);return}
+ const accounts=accountList(),hash=async value=>{const bytes=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(value));return Array.from(new Uint8Array(bytes),b=>b.toString(16).padStart(2,"0")).join("")};
+ try{if(registering){if(accounts.some(a=>a.email===email)){show(t.exists);return}accounts.push({name,email,passwordHash:await hash(password),role:role==="teacher"?"teacher":"student",grade});localStorage.setItem(ACCOUNT_KEY,JSON.stringify(accounts));localStorage.setItem(SESSION_KEY,email);renderAccountArea(t.registered);renderPortal()}else{const user=accounts.find(a=>a.email===email);if(!user||user.passwordHash!==await hash(password)){show(t.badLogin);return}localStorage.setItem(SESSION_KEY,email);renderAccountArea();renderPortal()}}catch{show(t.secureContext)}
+ });
+}
+
 $("roleSelect").addEventListener("change", renderPortal);
 $("gradeSelect").addEventListener("change", () => { const grade = $("gradeSelect").value; $("portalNotice").textContent = `${$("roleSelect").value === "student" ? translations[lang].portalStudentNotice : $("roleSelect").value === "teacher" ? translations[lang].portalTeacherNotice : translations[lang].portalAdminNotice} · ${grade}`; });
 $("assignmentInput").placeholder = translations[lang].assignmentPlaceholder;
@@ -275,3 +302,4 @@ applyLanguage=function(){originalApplyLanguage();renderLibrary();};
 
 applyLanguage();
 renderPortal();
+renderAccountArea();
