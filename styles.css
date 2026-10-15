@@ -80,3 +80,33 @@
 .progress-bars{height:105px;width:142px;display:flex;align-items:flex-end;justify-content:center;gap:9px;padding:14px;background:#fff;border-radius:14px;box-shadow:0 7px 12px #47616b2b}.progress-bars i{display:block;width:20px;border-radius:5px 5px 0 0;background:#6bb28a}.progress-bars i:nth-child(1){height:27%}.progress-bars i:nth-child(2){height:49%;background:#8cbf48}.progress-bars i:nth-child(3){height:69%;background:#f1b044}.progress-bars i:nth-child(4){height:92%;background:#4a9d9a}.progress-star{position:absolute;right:20%;top:0;color:#d9a331;font-size:36px;text-shadow:0 3px 4px #47616b25}
 @media(max-width:950px){.hub-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hub-card{min-height:350px}}
 @media(max-width:560px){.resource-hub{padding:48px 16px 54px}.hub-grid{grid-template-columns:1fr;gap:17px}.hub-card{min-height:335px;padding:20px}.hub-art{height:132px}.hub-copy h3{font-size:28px}}
+
+/* Biblioteca infantil: paleta alegre, cálida y legible */
+.library-section{background:linear-gradient(180deg,#fff8e8 0%,#f2fbff 100%)}
+.library-section .eyebrow{color:#e07a35}
+.library-section h2{color:#28456b}
+.library-note{background:#fff0b8;border:2px solid #ffd56a;color:#594526;border-radius:22px}
+.library-filters{background:#ffffff;border:2px solid #ccecf3;border-radius:24px;box-shadow:0 8px 0 #dff4f5}
+.library-filters input,.library-filters select{border:2px solid #bfe5ef;border-radius:14px;background:#fffdf6;color:#29415d}
+.book-card{overflow:hidden;border:2px solid #d9edf6;border-radius:24px;background:#fff;box-shadow:0 7px 0 #e5f2f8;transition:transform .18s ease,box-shadow .18s ease}
+.book-card:hover{transform:translateY(-4px);box-shadow:0 11px 0 #e5f2f8}
+.book-cover{min-height:175px;border-radius:0!important;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:22px;color:#30415d!important;position:relative;isolation:isolate}
+.book-cover:before{content:'✦  ✿  ★';position:absolute;right:12px;top:10px;font-size:25px;letter-spacing:5px;opacity:.55}
+.book-cover.cover-blue{background:linear-gradient(145deg,#bdeeff,#d9f8e5)!important}
+.book-cover.cover-gold{background:linear-gradient(145deg,#ffe4a8,#ffd6e7)!important}
+.book-cover strong{font-family:Georgia,serif;font-size:1.3rem;line-height:1.2;color:#29415d}
+.book-cover small{color:#405b78;font-weight:600}
+.book-details{padding:20px;background:#fff}
+.book-meta span{background:#e9f8ff;color:#356d86;border-radius:999px;padding:6px 10px;font-size:.75rem;font-weight:700}
+.book-card:nth-child(4n+1) .book-cover{background:linear-gradient(145deg,#ffe5a3,#fff0c9)!important}
+.book-card:nth-child(4n+2) .book-cover{background:linear-gradient(145deg,#c9f3dd,#e7ffef)!important}
+.book-card:nth-child(4n+3) .book-cover{background:linear-gradient(145deg,#ffd5e6,#ffeaf3)!important}
+.book-card:nth-child(4n) .book-cover{background:linear-gradient(145deg,#cfe8ff,#e5f2ff)!important}
+.book-details .button{background:#ff9f68;color:#fff;border-radius:999px;box-shadow:0 4px 0 #e17c49}
+.book-details .button:hover{background:#f58b50}
+.book-reader-dialog{width:min(960px,94vw);height:min(82vh,850px);padding:0;border:3px solid #bfe9ef;border-radius:24px;overflow:hidden;background:#fffdf7;color:#29415d;box-shadow:0 24px 70px #1c355544}
+.book-reader-dialog::backdrop{background:#19344b99;backdrop-filter:blur(3px)}
+.book-reader-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 20px;background:#fff0bd;border-bottom:2px solid #ffe19a}
+.book-reader-head h2{margin:0;font-size:1.15rem;color:#29415d}
+.book-reader-head button{border:0;border-radius:50%;width:40px;height:40px;background:#ffb5cb;color:#62374a;font-size:1.5rem;cursor:pointer}
+.book-reader-frame{width:100%;height:calc(100% - 72px);border:0;background:white}

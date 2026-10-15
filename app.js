@@ -189,11 +189,11 @@ const digitalBooks = [
  {title:"300 Fábulas de Esopo",author:"Esopo",language:"es",level:"primary",subject:"Fábulas",url:"https://ministeriodeeducacion.gob.do/sobre-nosotros/areas-institucionales/biblioteca-virtual/literatura-infantil-y-juvenil",source:"MINERD — Biblioteca Virtual",note:"Fábulas para lectura y conversación sobre sus enseñanzas."},
  {title:"Cuentos para niños",author:"Luis Coloma",language:"es",level:"primary",subject:"Cuentos",url:"https://www.cervantesvirtual.com/obra/cuentos-para-ninos--0/",source:"Biblioteca Virtual Miguel de Cervantes",note:"Obra consultable en línea en el sitio de la biblioteca."},
  {title:"Cuentos infantiles",author:"Varios autores",language:"es",level:"primary",subject:"Cuentos",url:"https://www.cervantesvirtual.com/obra/cuentos-infantiles-1215755/",source:"Biblioteca Virtual Miguel de Cervantes",note:"Registro bibliográfico de cuentos infantiles."},
- {title:"Alice's Adventures in Wonderland",author:"Lewis Carroll",language:"en",level:"primary",subject:"Classic literature",url:"https://www.gutenberg.org/ebooks/11",source:"Project Gutenberg",note:"Read the public-domain English edition online."},
- {title:"The Wonderful Wizard of Oz",author:"L. Frank Baum",language:"en",level:"primary",subject:"Classic literature",url:"https://www.gutenberg.org/ebooks/55",source:"Project Gutenberg",note:"Read the classic English edition online."},
- {title:"Aesop's Fables",author:"Aesop",language:"en",level:"primary",subject:"Fables",url:"https://www.gutenberg.org/ebooks/11339",source:"Project Gutenberg",note:"A collection of classic fables in English."},
- {title:"The Adventures of Tom Sawyer",author:"Mark Twain",language:"en",level:"secondary",subject:"Classic literature",url:"https://www.gutenberg.org/ebooks/74",source:"Project Gutenberg",note:"Classic novel; check suitability for the student's reading level."},
- {title:"The Jungle Book",author:"Rudyard Kipling",language:"en",level:"secondary",subject:"Classic literature",url:"https://www.gutenberg.org/ebooks/236",source:"Project Gutenberg",note:"Classic collection of stories in English."},
+ {title:"Alice's Adventures in Wonderland",author:"Lewis Carroll",language:"en",level:"primary",subject:"Classic literature",url:"https://www.gutenberg.org/files/11/11-h/11-h.htm",source:"Project Gutenberg",note:"Read the public-domain English edition online."},
+ {title:"The Wonderful Wizard of Oz",author:"L. Frank Baum",language:"en",level:"primary",subject:"Classic literature",url:"https://www.gutenberg.org/files/55/55-h/55-h.htm",source:"Project Gutenberg",note:"Read the classic English edition online."},
+ {title:"Aesop's Fables",author:"Aesop",language:"en",level:"primary",subject:"Fables",url:"https://www.gutenberg.org/files/11/11-h/11-h.htm339",source:"Project Gutenberg",note:"A collection of classic fables in English."},
+ {title:"The Adventures of Tom Sawyer",author:"Mark Twain",language:"en",level:"secondary",subject:"Classic literature",url:"https://www.gutenberg.org/files/74/74-h/74-h.htm",source:"Project Gutenberg",note:"Classic novel; check suitability for the student's reading level."},
+ {title:"The Jungle Book",author:"Rudyard Kipling",language:"en",level:"secondary",subject:"Classic literature",url:"https://www.gutenberg.org/files/236/236-h/236-h.htm",source:"Project Gutenberg",note:"Classic collection of stories in English."},
  {title:"Cuentos para niños — visor de obras",author:"Biblioteca Virtual Miguel de Cervantes",language:"es",level:"secondary",subject:"Lectura",url:"https://www.cervantesvirtual.com/obra-visor/cuentos-para-ninos--0/html/",source:"Biblioteca Virtual Miguel de Cervantes",note:"Lectura en navegador; algunos textos clásicos pueden tener lenguaje antiguo."}
 ];
 function renderLibrary(){
@@ -201,7 +201,7 @@ function renderLibrary(){
  const q=($("bookSearch").value||"").trim().toLocaleLowerCase();
  const language=$("bookLanguage").value, level=$("bookLevel").value;
  const books=digitalBooks.filter(b=>(language==="all"||b.language===language)&&(level==="all"||b.level===level)&&(`${b.title} ${b.author} ${b.subject} ${b.source}`).toLocaleLowerCase().includes(q));
- grid.innerHTML=books.map(b=>`<article class="book-card"><div class="book-cover ${b.language==='en'?'cover-blue':'cover-gold'}"><span>${b.language==='en'?'EN':'ES'}</span><strong>${escapeHTML(b.title)}</strong><small>${escapeHTML(b.author)}</small></div><div class="book-details"><div class="book-meta"><span>${b.language==='en'?translations[lang].bookEnglish:translations[lang].bookSpanish}</span><span>${translations[lang][b.level==='preschool'?'bookPreschool':b.level==='secondary'?'bookSecondary':'bookPrimary']}</span></div><h3>${escapeHTML(b.title)}</h3><p class="book-author">${escapeHTML(b.author)}</p><p>${escapeHTML(b.note)}</p><small class="book-source">${escapeHTML(b.source)}</small><a class="button button-small" href="${b.url}" target="_blank" rel="noopener noreferrer">${translations[lang].bookOpen}</a></div></article>`).join("");
+ grid.innerHTML=books.map(b=>`<article class="book-card"><div class="book-cover ${b.language==='en'?'cover-blue':'cover-gold'}"><span>${b.language==='en'?'EN':'ES'}</span><strong>${escapeHTML(b.title)}</strong><small>${escapeHTML(b.author)}</small></div><div class="book-details"><div class="book-meta"><span>${b.language==='en'?translations[lang].bookEnglish:translations[lang].bookSpanish}</span><span>${translations[lang][b.level==='preschool'?'bookPreschool':b.level==='secondary'?'bookSecondary':'bookPrimary']}</span></div><h3>${escapeHTML(b.title)}</h3><p class="book-author">${escapeHTML(b.author)}</p><p>${escapeHTML(b.note)}</p><small class="book-source">${escapeHTML(b.source)}</small><button class="button button-small" type="button" data-read-book="${escapeHTML(b.url)}" data-book-title="${escapeHTML(b.title)}">${lang==="es"?"Leer aquí 📖":"Read here 📖"}</button></div></article>`).join("");
  if(!books.length) grid.innerHTML=`<p class="book-empty">${translations[lang].bookNoResults}</p>`;
 }
 ["bookSearch","bookLanguage","bookLevel"].forEach(id=>$(id)?.addEventListener(id==="bookSearch"?"input":"change",renderLibrary));
@@ -234,3 +234,15 @@ applyLanguage=function(){originalApplyLanguage();renderLibrary();};
 
 applyLanguage();
 renderPortal();
+
+
+// Integrated reading panel: the student stays inside the academy.
+(function setupBookReader(){
+ const section=document.getElementById("library"); if(!section) return;
+ const dialog=document.createElement("dialog"); dialog.className="book-reader-dialog"; dialog.id="bookReaderDialog";
+ dialog.innerHTML='<div class="book-reader-head"><h2 id="bookReaderTitle">📚 Lectura</h2><button type="button" id="closeBookReader" aria-label="Cerrar lectura">×</button></div><iframe class="book-reader-frame" id="bookReaderFrame" title="Lector de libros" loading="lazy" referrerpolicy="no-referrer"></iframe>';
+ document.body.appendChild(dialog);
+ section.addEventListener("click",e=>{const btn=e.target.closest("[data-read-book]");if(!btn)return;const url=btn.dataset.readBook;document.getElementById("bookReaderTitle").textContent="📚 "+btn.dataset.bookTitle;document.getElementById("bookReaderFrame").src=url;dialog.showModal();});
+ document.getElementById("closeBookReader").addEventListener("click",()=>{dialog.close();document.getElementById("bookReaderFrame").src="about:blank";});
+ dialog.addEventListener("click",e=>{if(e.target===dialog){dialog.close();document.getElementById("bookReaderFrame").src="about:blank";}});
+})();
