@@ -33,6 +33,7 @@
       <a href="#library" data-i18n="navLibrary">Biblioteca</a>
       <a href="#practice" data-i18n="navPractice">Práctica</a>
       <a href="#portal" data-i18n="navPortal">Portal</a>
+      <a href="#account" data-i18n="navAccount">Cuenta</a>
     </nav>
     <div class="header-actions">
       <button class="text-button language-switch" id="languageToggle" aria-label="Cambiar idioma">EN</button>
@@ -64,6 +65,18 @@
         <div class="floating-note note-one"><span>✓</span><div><b data-i18n="noteProgress">¡Buen progreso!</b><small data-i18n="noteKeepGoing">Sigue así</small></div></div>
         <div class="floating-note note-two"><span>★</span><div><b>+10 XP</b><small data-i18n="noteCompleted">Actividad completada</small></div></div>
       </div>
+    </section>
+
+    <section class="account-entry-section" id="account" aria-labelledby="accountEntryTitle">
+      <div class="account-entry-heading">
+        <p class="eyebrow" data-i18n="accountEntryEyebrow">TU CUENTA, MÁS CERCA</p>
+        <h2 id="accountEntryTitle" data-i18n="accountEntryTitle">Inicia sesión o crea tu cuenta</h2>
+        <p data-i18n="accountEntryDesc">Accede a tu perfil de estudiante o profesor sin tener que buscarlo al final de la página.</p>
+      </div>
+      <section class="account-panel" id="accountPanel" aria-labelledby="accountPanelTitle">
+        <div class="account-panel-heading"><div><p class="eyebrow" data-account-i18n="eyebrow">TU CUENTA</p><h3 id="accountPanelTitle" data-account-i18n="title">Crea tu perfil o inicia sesión</h3></div><span class="account-icon" aria-hidden="true">♙</span></div>
+        <div id="accountArea" aria-live="polite"></div>
+      </section>
     </section>
 
     <section class="stats-strip" aria-label="Academy features">
@@ -181,10 +194,6 @@
         <label for="gradeSelect" data-i18n="gradeLabel">Mi nivel</label>
         <select id="gradeSelect"><option>Preescolar</option><option>1.º de primaria</option><option>2.º de primaria</option><option>3.º de primaria</option><option>4.º de primaria</option><option>5.º de primaria</option><option>6.º de primaria</option><option>1.º de secundaria</option><option>2.º de secundaria</option><option>3.º de secundaria</option><option>4.º de secundaria</option><option>5.º de secundaria</option><option>6.º de secundaria</option></select>
       </div>
-      <section class="account-panel" id="accountPanel" aria-labelledby="accountPanelTitle">
-        <div class="account-panel-heading"><div><p class="eyebrow" data-account-i18n="eyebrow">TU CUENTA</p><h3 id="accountPanelTitle" data-account-i18n="title">Crea tu perfil o inicia sesión</h3></div><span class="account-icon" aria-hidden="true">♙</span></div>
-        <div id="accountArea" aria-live="polite"></div>
-      </section>
       <div id="portalNotice" class="portal-notice" aria-live="polite"></div>
       <div id="portalCards" class="portal-grid"></div>
       <div class="portal-lower-grid">
