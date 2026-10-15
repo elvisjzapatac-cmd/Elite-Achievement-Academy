@@ -46,7 +46,7 @@ function applyLanguage() {
   $("quizHint").textContent = translations[lang].quizHint;
   renderQuestion();
 }
-$("languageToggle").addEventListener("click", () => { lang = lang === "es" ? "en" : "es"; applyLanguage(); });
+$("languageToggle").addEventListener("click", () => { lang = lang === "es" ? "en" : "es"; applyLanguage(); renderPortal(); $("assignmentInput").placeholder = translations[lang].assignmentPlaceholder; });
 $("menuToggle").addEventListener("click", () => {
   const open = $("mainNav").classList.toggle("open");
   $("menuToggle").setAttribute("aria-expanded", String(open));
@@ -121,4 +121,72 @@ $("closeDialog").addEventListener("click", () => dialog.close());
 dialog.addEventListener("click", e => { if (e.target === dialog) dialog.close(); });
 $("printActivity").addEventListener("click", () => window.print());
 $("dialogPractice").addEventListener("click", () => { dialog.close(); $("practice").scrollIntoView({behavior:"smooth"}); currentQuestion = 0; chosenAnswer = null; correctCount = 0; $("quizResult").classList.add("hidden"); $("quizContent").classList.remove("hidden"); renderQuestion(); });
+
+// Phase 1 portal translations and local demo features.
+Object.assign(translations.es, {
+  navPortal:"Portal", levelPreschool:"Preescolar", levelMiddle:"Intermedia",
+  portalEyebrow:"UN ESPACIO PARA CADA APRENDIZ", portalTitle:"Portal de la academia", portalDesc:"Explora una vista de demostración para estudiantes, docentes y administración.",
+  roleLabel:"Vista del portal", roleStudent:"Estudiante", roleTeacher:"Profesor/a", roleAdmin:"Administrador/a", gradeLabel:"Mi nivel",
+  portalStudentNotice:"¡Hola, estudiante! Aquí puedes practicar, ganar puntos y revisar tus tareas.", portalTeacherNotice:"Vista de demostración docente: organiza tareas de práctica para este navegador.", portalAdminNotice:"Vista de demostración administrativa. Las cifras son locales y no representan usuarios reales.",
+  cardLearn:"Aprendizaje", cardLearnDesc:"Accede a las materias, fichas y cuestionarios disponibles.", cardPoints:"Puntos y logros", cardPointsDesc:"Los puntos se guardan en este dispositivo cuando aciertas respuestas.", cardTasks:"Tareas", cardTasksDesc:"Consulta las tareas de práctica guardadas en este navegador.",
+  cardClasses:"Grupos y clases", cardClassesDesc:"Panel ilustrativo para organizar grupos cuando exista una cuenta segura.", cardAssignments:"Plan de tareas", cardAssignmentsDesc:"Añade tareas de ejemplo abajo y márcalas al completarlas.", cardResources:"Recursos educativos", cardResourcesDesc:"Consulta fichas y enlaces a recursos audiovisuales.",
+  cardUsers:"Usuarios", cardUsersDesc:"El registro real de usuarios requiere autenticación y base de datos.", cardContent:"Contenido", cardContentDesc:"Materias y recursos que se pueden ampliar en próximas fases.", cardSecurity:"Seguridad", cardSecurityDesc:"Esta vista no administra cuentas ni permisos reales.",
+  assignmentsEyebrow:"ORGANIZA EL APRENDIZAJE", assignmentsTitle:"Tareas de práctica", assignmentLabel:"Añadir una tarea de demostración", addTask:"Añadir", assignmentPlaceholder:"Ej. Practicar las tablas del 3", emptyTasks:"Todavía no hay tareas. Añade una arriba.",
+  videoEyebrow:"MIRA Y APRENDE", videoTitle:"Lecciones en video", videoDesc:"Abre búsquedas educativas para encontrar videos adecuados a tu tema y nivel.", videoMath:"Matemáticas", videoReading:"Lectura", videoScience:"Ciencias", portalDisclaimer:"Demo local: el selector de roles no verifica identidad. Las tareas y puntos se guardan solo en este navegador. No introduzcas datos personales reales. Los enlaces de video abren búsquedas externas.",
+  taskAdded:"Tarea añadida.", roleStudentTitle:"Tu espacio de aprendizaje", roleTeacherTitle:"Espacio del docente", roleAdminTitle:"Resumen de administración", tasksCount:"tareas", pointsLabel:"puntos", worksheetsCount:"fichas listas", usersLabel:"usuarios reales: no configurados"
+});
+Object.assign(translations.en, {
+  navPortal:"Portal", levelPreschool:"Preschool", levelMiddle:"Middle school",
+  portalEyebrow:"A SPACE FOR EVERY LEARNER", portalTitle:"Academy portal", portalDesc:"Explore a demo view for students, teachers, and administrators.",
+  roleLabel:"Portal view", roleStudent:"Student", roleTeacher:"Teacher", roleAdmin:"Administrator", gradeLabel:"My grade",
+  portalStudentNotice:"Hello, learner! Practice, earn points, and review your tasks here.", portalTeacherNotice:"Teacher demo view: organize practice tasks in this browser.", portalAdminNotice:"Administrator demo view. These figures are local and do not represent real users.",
+  cardLearn:"Learning", cardLearnDesc:"Access available subjects, worksheets, and quizzes.", cardPoints:"Points and rewards", cardPointsDesc:"Points are saved on this device when you answer correctly.", cardTasks:"Tasks", cardTasksDesc:"Review practice tasks saved in this browser.",
+  cardClasses:"Classes and groups", cardClassesDesc:"An illustrative panel for organizing groups once secure accounts exist.", cardAssignments:"Task planner", cardAssignmentsDesc:"Add sample tasks below and mark them complete.", cardResources:"Learning resources", cardResourcesDesc:"Browse worksheets and audiovisual resource links.",
+  cardUsers:"Users", cardUsersDesc:"Real user registration requires authentication and a database.", cardContent:"Content", cardContentDesc:"Subjects and resources can be expanded in future phases.", cardSecurity:"Security", cardSecurityDesc:"This view does not manage real accounts or permissions.",
+  assignmentsEyebrow:"ORGANIZE LEARNING", assignmentsTitle:"Practice tasks", assignmentLabel:"Add a demo task", addTask:"Add", assignmentPlaceholder:"E.g. Practice the 3 times table", emptyTasks:"No tasks yet. Add one above.",
+  videoEyebrow:"WATCH AND LEARN", videoTitle:"Video lessons", videoDesc:"Open educational searches to find videos for your topic and grade.", videoMath:"Mathematics", videoReading:"Reading", videoScience:"Science", portalDisclaimer:"Local demo: the role selector does not verify identity. Tasks and points are saved only in this browser. Do not enter real personal information. Video links open external searches.",
+  taskAdded:"Task added.", roleStudentTitle:"Your learning space", roleTeacherTitle:"Teacher space", roleAdminTitle:"Administration overview", tasksCount:"tasks", pointsLabel:"points", worksheetsCount:"worksheets ready", usersLabel:"real users: not configured"
+});
+
+const TASKS_KEY = "eaa-demo-tasks-v1";
+function getTasks() { try { return JSON.parse(localStorage.getItem(TASKS_KEY) || "[]"); } catch { return []; } }
+function saveTasks(tasks) { localStorage.setItem(TASKS_KEY, JSON.stringify(tasks)); }
+function renderPortal() {
+  const role = $("roleSelect").value;
+  const t = translations[lang];
+  const notice = {student:t.portalStudentNotice, teacher:t.portalTeacherNotice, admin:t.portalAdminNotice}[role];
+  $("portalNotice").textContent = notice;
+  let cards;
+  if (role === "student") cards = [
+    ["📚",t.cardLearn,t.cardLearnDesc, lang === "es" ? "4 materias" : "4 subjects"],
+    ["🏆",t.cardPoints,t.cardPointsDesc,`${score} ${t.pointsLabel}`],
+    ["✏️",t.cardTasks,t.cardTasksDesc,`${getTasks().length} ${t.tasksCount}`]
+  ];
+  else if (role === "teacher") cards = [
+    ["👩‍🏫",t.cardClasses,t.cardClassesDesc,"—"],
+    ["📝",t.cardAssignments,t.cardAssignmentsDesc,`${getTasks().length} ${t.tasksCount}`],
+    ["🎬",t.cardResources,t.cardResourcesDesc,`3 ${t.worksheetsCount}`]
+  ];
+  else cards = [
+    ["👥",t.cardUsers,t.cardUsersDesc,t.usersLabel],
+    ["📘",t.cardContent,t.cardContentDesc,lang === "es" ? "4 materias" : "4 subjects"],
+    ["🔐",t.cardSecurity,t.cardSecurityDesc,lang === "es" ? "Demo" : "Demo"]
+  ];
+  $("portalCards").innerHTML = cards.map(c => `<article class="portal-card"><div class="portal-card-icon">${c[0]}</div><h3>${c[1]}</h3><p>${c[2]}</p><strong>${c[3]}</strong></article>`).join("");
+  renderTasks();
+}
+function renderTasks() {
+  const list = $("assignmentList"), tasks = getTasks();
+  if (!tasks.length) { list.innerHTML = `<li>${translations[lang].emptyTasks}</li>`; return; }
+  list.innerHTML = tasks.map(task => `<li class="${task.done ? "done" : ""}"><input type="checkbox" data-task-id="${task.id}" ${task.done ? "checked" : ""} aria-label="${lang === "es" ? "Marcar tarea" : "Mark task"}"><span>${escapeHTML(task.text)}</span><button type="button" class="task-remove" data-remove-task="${task.id}" aria-label="${lang === "es" ? "Eliminar tarea" : "Remove task"}">×</button></li>`).join("");
+}
+function escapeHTML(value) { return String(value).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;", "'":"&#39;"}[c])); }
+$("roleSelect").addEventListener("change", renderPortal);
+$("gradeSelect").addEventListener("change", () => { const grade = $("gradeSelect").value; $("portalNotice").textContent = `${$("roleSelect").value === "student" ? translations[lang].portalStudentNotice : $("roleSelect").value === "teacher" ? translations[lang].portalTeacherNotice : translations[lang].portalAdminNotice} · ${grade}`; });
+$("assignmentInput").placeholder = translations[lang].assignmentPlaceholder;
+$("assignmentForm").addEventListener("submit", e => { e.preventDefault(); const input = $("assignmentInput"); const text = input.value.trim(); if (!text) return; const tasks = getTasks(); tasks.push({id:Date.now().toString(36) + Math.random().toString(36).slice(2,6),text,done:false}); saveTasks(tasks); input.value = ""; renderPortal(); });
+$("assignmentList").addEventListener("change", e => { const id = e.target.dataset.taskId; if (!id) return; saveTasks(getTasks().map(task => task.id === id ? {...task,done:e.target.checked} : task)); renderPortal(); });
+$("assignmentList").addEventListener("click", e => { const id = e.target.dataset.removeTask; if (!id) return; saveTasks(getTasks().filter(task => task.id !== id)); renderPortal(); });
+
 applyLanguage();
+renderPortal();

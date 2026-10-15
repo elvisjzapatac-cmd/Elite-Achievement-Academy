@@ -23,6 +23,7 @@
       <a href="#subjects" data-i18n="navSubjects">Materias</a>
       <a href="#worksheets" data-i18n="navWorksheets">Fichas</a>
       <a href="#practice" data-i18n="navPractice">Práctica</a>
+      <a href="#portal" data-i18n="navPortal">Portal</a>
       <a href="#about" data-i18n="navAbout">Nosotros</a>
     </nav>
     <div class="header-actions">
@@ -76,6 +77,8 @@
           <option value="early" data-i18n="levelEarly">Inicial</option>
           <option value="primary" data-i18n="levelPrimary">Primaria</option>
           <option value="secondary" data-i18n="levelSecondary">Secundaria</option>
+          <option value="preschool" data-i18n="levelPreschool">Preescolar</option>
+          <option value="middle" data-i18n="levelMiddle">Intermedia</option>
         </select>
       </div>
       <div class="subject-grid" id="subjectGrid">
@@ -124,6 +127,27 @@
         </div>
         <div id="quizResult" class="quiz-result hidden"><div class="result-medal">✦</div><h3 data-i18n="quizFinished">¡Actividad completada!</h3><p id="resultText"></p><button class="button" id="restartQuiz" data-i18n="tryAgain">Practicar otra vez</button></div>
       </div>
+    </section>
+
+
+    <section class="section portal-section" id="portal">
+      <div class="section-heading">
+        <div><p class="eyebrow" data-i18n="portalEyebrow">UN ESPACIO PARA CADA APRENDIZ</p><h2 data-i18n="portalTitle">Portal de la academia</h2></div>
+        <p data-i18n="portalDesc">Explora una vista de demostración para estudiantes, docentes y administración.</p>
+      </div>
+      <div class="portal-controls">
+        <label for="roleSelect" data-i18n="roleLabel">Vista del portal</label>
+        <select id="roleSelect"><option value="student" data-i18n="roleStudent">Estudiante</option><option value="teacher" data-i18n="roleTeacher">Profesor/a</option><option value="admin" data-i18n="roleAdmin">Administrador/a</option></select>
+        <label for="gradeSelect" data-i18n="gradeLabel">Mi nivel</label>
+        <select id="gradeSelect"><option>Preescolar</option><option>1.º de primaria</option><option>2.º de primaria</option><option>3.º de primaria</option><option>4.º de primaria</option><option>5.º de primaria</option><option>6.º de primaria</option><option>1.º de secundaria</option><option>2.º de secundaria</option><option>3.º de secundaria</option><option>4.º de secundaria</option><option>5.º de secundaria</option><option>6.º de secundaria</option></select>
+      </div>
+      <div id="portalNotice" class="portal-notice" aria-live="polite"></div>
+      <div id="portalCards" class="portal-grid"></div>
+      <div class="portal-lower-grid">
+        <article class="portal-panel"><div class="panel-heading"><div><p class="eyebrow" data-i18n="assignmentsEyebrow">ORGANIZA EL APRENDIZAJE</p><h3 data-i18n="assignmentsTitle">Tareas de práctica</h3></div><span class="panel-icon">✎</span></div><form id="assignmentForm"><label for="assignmentInput" data-i18n="assignmentLabel">Añadir una tarea de demostración</label><div class="assignment-entry"><input id="assignmentInput" maxlength="100" required placeholder="Ej. Practicar las tablas del 3"><button class="button button-small" type="submit" data-i18n="addTask">Añadir</button></div></form><ul id="assignmentList" class="assignment-list"></ul></article>
+        <article class="portal-panel"><div class="panel-heading"><div><p class="eyebrow" data-i18n="videoEyebrow">MIRA Y APRENDE</p><h3 data-i18n="videoTitle">Lecciones en video</h3></div><span class="panel-icon">▶</span></div><p data-i18n="videoDesc">Abre búsquedas educativas para encontrar videos adecuados a tu tema y nivel.</p><div class="video-links"><a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/results?search_query=matematicas+para+primaria+educativo" data-i18n="videoMath">Matemáticas</a><a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/results?search_query=lectura+comprension+para+ninos" data-i18n="videoReading">Lectura</a><a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/results?search_query=ciencias+naturales+para+estudiantes" data-i18n="videoScience">Ciencias</a></div></article>
+      </div>
+      <p class="portal-disclaimer" data-i18n="portalDisclaimer">Demo local: el selector de roles no verifica identidad. Las tareas y puntos se guardan solo en este navegador. No introduzcas datos personales reales.</p>
     </section>
 
     <section class="section section-light about-section" id="about">

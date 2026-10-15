@@ -11,3 +11,31 @@
 @media(max-width:800px){.site-header{height:74px}.brand{min-width:0;flex:1}.brand-mark{width:39px}.brand-copy strong{font-size:10px;letter-spacing:.03em}.brand-copy small{font-size:7px}.menu-toggle{display:block}.main-nav{display:none;position:absolute;top:73px;left:0;right:0;height:auto;padding:12px 24px 20px;background:var(--navy2);border-bottom:1px solid var(--gold);flex-direction:column;align-items:stretch;gap:0}.main-nav.open{display:flex}.main-nav a{height:auto;padding:12px 0;border-bottom:1px solid #23444a}.header-actions{gap:8px}.header-actions .button{display:none}.hero{grid-template-columns:1fr;padding-top:48px}.hero-art{min-height:280px;margin-top:15px}.art-card{height:250px}.note-one{left:8%}.note-two{right:6%}.stats-strip{grid-template-columns:repeat(2,1fr);padding-block:20px}.stats-strip>div{justify-content:flex-start;border-right:0}.section{padding-block:54px}.section-heading{display:block}.section-heading>p{margin-top:12px}.subject-grid{grid-template-columns:1fr}.subject-card{min-height:145px}.worksheet-grid{grid-template-columns:1fr}.worksheet-card{min-height:0}.practice-section{grid-template-columns:1fr;padding-block:55px}.quiz-card{justify-self:stretch}.about-section{grid-template-columns:1fr;gap:15px}.about-emblem{width:58px;height:58px;font-size:30px}.about-values{grid-column:1;grid-template-columns:1fr 1fr 1fr}.about-section h2{font-size:32px}}
 @media(max-width:430px){.brand-copy strong{max-width:195px;white-space:normal;font-size:9px}.brand-copy small{letter-spacing:.12em}.brand-mark{width:32px}.site-header{padding-inline:13px;gap:10px}.text-button{padding:6px 8px}.hero{padding-inline:20px}.hero-actions{flex-direction:column;align-items:stretch}.hero-actions .button{justify-content:space-between}.hero-art{min-height:260px}.art-card{width:76%;height:235px}.floating-note{padding:8px;font-size:10px}.note-one{left:0}.note-two{right:0}.stats-strip{padding-inline:20px;gap:13px}.stats-strip>div{gap:8px}.stats-strip p{font-size:10px}.stats-strip small{font-size:9px}.stat-icon{font-size:23px}.section{padding-inline:20px}.subject-card{gap:13px;padding:15px}.subject-symbol{width:55px;height:55px;flex-basis:55px;font-size:27px}.subject-card h3{font-size:17px}.subject-card p{font-size:11px}.quiz-card{padding:19px}.quiz-card h3{font-size:21px}.answer-list{grid-template-columns:1fr}.quiz-footer{align-items:flex-start}.quiz-footer button{white-space:nowrap}.about-values{grid-template-columns:1fr}.dialog-actions{flex-direction:column}.dialog-actions .button{width:100%}}
 @media print{body{background:white;color:black}.site-header,.hero,.stats-strip,main>section:not(#worksheets),.site-footer,.dialog-actions,.dialog-head .close-dialog{display:none!important}.activity-dialog{display:block;position:static;border:0;box-shadow:none;width:100%;max-height:none;padding:0}.activity-dialog::backdrop{display:none}.print-only{display:block}.dialog-head{display:block}.activity-dialog:not([open]){display:none}}
+
+/* Portal expansion — Phase 1 */
+.portal-section { background: linear-gradient(145deg, #f4f7ff, #fff8e8); }
+.portal-controls { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin: 24px 0 18px; padding:18px; background:#fff; border:1px solid #e3e8f4; border-radius:18px; box-shadow:0 8px 24px rgba(22,39,79,.06); }
+.portal-controls label, #assignmentForm label { font-size:.9rem; font-weight:700; color:#24365c; }
+.portal-controls select { padding:11px 14px; border:1px solid #cbd5e8; border-radius:10px; background:#fff; color:#17264a; font:inherit; }
+.portal-notice { margin: 12px 0; color:#586681; font-size:.95rem; }
+.portal-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.portal-card { padding:22px; background:#fff; border:1px solid #e5eaf4; border-radius:20px; box-shadow:0 10px 28px rgba(31,49,90,.06); }
+.portal-card .portal-card-icon { width:46px;height:46px;display:grid;place-items:center;border-radius:14px;background:#eaf0ff;color:#3657bb;font-size:1.35rem;margin-bottom:15px; }
+.portal-card:nth-child(2) .portal-card-icon { background:#fff0d6;color:#a96600; }
+.portal-card:nth-child(3) .portal-card-icon { background:#e4f8ef;color:#16774c; }
+.portal-card h3 { margin:0 0 8px; color:#192b50; font-size:1.1rem; }
+.portal-card p { margin:0;color:#65718b;line-height:1.6;font-size:.94rem; }
+.portal-card strong { display:block;margin-top:14px;font-size:1.45rem;color:#253d77; }
+.portal-lower-grid { display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px; }
+.portal-panel { background:#fff;border:1px solid #e5eaf4;border-radius:20px;padding:22px; }
+.panel-heading { display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px; }
+.panel-heading .eyebrow { margin:0 0 5px; }.panel-heading h3 { margin:0;color:#192b50; }
+.panel-icon { width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#fff0d6;font-size:1.2rem; }
+.assignment-entry { display:flex;gap:8px;margin-top:8px; }.assignment-entry input { min-width:0;flex:1;padding:11px 12px;border:1px solid #cbd5e8;border-radius:10px;font:inherit; }
+.assignment-list { padding:0;margin:16px 0 0;list-style:none;display:grid;gap:8px; }
+.assignment-list li { display:flex;align-items:center;gap:9px;padding:10px 12px;background:#f6f8fc;border-radius:10px;color:#33415f; }
+.assignment-list li input { accent-color:#4766cf; }.assignment-list li.done span { text-decoration:line-through;color:#8b95a9; }
+.video-links { display:flex;flex-wrap:wrap;gap:8px;margin-top:16px; }.video-links a { text-decoration:none;padding:9px 12px;border-radius:999px;background:#eef2ff;color:#334fa4;font-weight:700;font-size:.9rem; }
+.portal-disclaimer { margin-top:18px;font-size:.82rem;color:#7b8497;line-height:1.5; }
+@media(max-width:800px){.portal-grid{grid-template-columns:1fr}.portal-lower-grid{grid-template-columns:1fr}.portal-controls{align-items:stretch;flex-direction:column}.portal-controls select{width:100%}}
+@media print { .site-header,.site-footer,.hero,.stats-strip,.portal-section,.practice-section,.worksheets-section,.about-section { display:none!important; } }
