@@ -214,6 +214,30 @@ function renderLibrary(){
  if(!books.length) grid.innerHTML=`<p class="book-empty">${translations[lang].bookNoResults}</p>`;
 }
 ["bookSearch","bookLanguage","bookLevel"].forEach(id=>$(id)?.addEventListener(id==="bookSearch"?"input":"change",renderLibrary));
+
+// Homepage learning hub: bilingual labels for the visual resource cards.
+Object.assign(translations.es, {
+  hubEyebrow:"TU ESPACIO DE APRENDIZAJE", hubTitle:"¿Qué quieres aprender hoy?", hubDesc:"Entra en cada apartado y descubre recursos preparados para ti.",
+  hubTagPrint:"PRACTICA E IMPRIME", hubWorksheets:"Worksheets", hubWorksheetsDesc:"Fichas para resolver en pantalla o imprimir en casa.", hubBrowse:"EXPLORAR ↗",
+  hubTagStudy:"APRENDE PASO A PASO", hubWorkbooks:"Workbooks", hubWorkbooksDesc:"Cuadernos y colecciones de ejercicios por materia.", hubExplore:"EXPLORAR ↗",
+  hubTagRead:"LEE Y DESCUBRE", hubLibrary:"Biblioteca digital", hubLibraryDesc:"Explora libros y cuentos de fuentes digitales.",
+  hubTagWatch:"MIRA Y APRENDE", hubVideos:"Videos", hubVideosDesc:"Lecciones visuales para repasar temas escolares.",
+  hubTagPlay:"APRENDE JUGANDO", hubActivities:"Actividades", hubActivitiesDesc:"Actividades interactivas para practicar habilidades.", hubStart:"COMENZAR ↗",
+  hubTagCheck:"COMPRUEBA LO QUE SABES", hubTests:"Pruebas y cuestionarios", hubTestsDesc:"Responde preguntas y comprueba tus conocimientos.", hubTakeTest:"HACER PRUEBA ↗",
+  hubTagGoals:"CADA PASO CUENTA", hubProgress:"Mi progreso", hubProgressDesc:"Consulta tus puntos y continúa avanzando.", hubViewProgress:"VER PROGRESO ↗"
+});
+Object.assign(translations.en, {
+  hubEyebrow:"YOUR LEARNING SPACE", hubTitle:"What would you like to learn today?", hubDesc:"Choose a section and discover resources made for you.",
+  hubTagPrint:"PRACTICE AND PRINT", hubWorksheets:"Worksheets", hubWorksheetsDesc:"Activities to complete on screen or print at home.", hubBrowse:"BROWSE ↗",
+  hubTagStudy:"LEARN STEP BY STEP", hubWorkbooks:"Workbooks", hubWorkbooksDesc:"Exercise books and collections organized by subject.", hubExplore:"EXPLORE ↗",
+  hubTagRead:"READ AND DISCOVER", hubLibrary:"Digital Library", hubLibraryDesc:"Explore books and stories from digital sources.",
+  hubTagWatch:"WATCH AND LEARN", hubVideos:"Videos", hubVideosDesc:"Visual lessons to review school topics.",
+  hubTagPlay:"LEARN BY PLAYING", hubActivities:"Activities", hubActivitiesDesc:"Interactive activities to practice new skills.", hubStart:"START ↗",
+  hubTagCheck:"CHECK WHAT YOU KNOW", hubTests:"Tests & Quizzes", hubTestsDesc:"Answer questions and check your knowledge.", hubTakeTest:"TAKE A TEST ↗",
+  hubTagGoals:"EVERY STEP COUNTS", hubProgress:"My Progress", hubProgressDesc:"Check your points and keep moving forward.", hubViewProgress:"VIEW PROGRESS ↗"
+});
+
+
 const originalApplyLanguage=applyLanguage;
 applyLanguage=function(){originalApplyLanguage();renderLibrary();};
 
