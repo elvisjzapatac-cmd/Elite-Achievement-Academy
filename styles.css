@@ -80,3 +80,13 @@
 .progress-bars{height:105px;width:142px;display:flex;align-items:flex-end;justify-content:center;gap:9px;padding:14px;background:#fff;border-radius:14px;box-shadow:0 7px 12px #47616b2b}.progress-bars i{display:block;width:20px;border-radius:5px 5px 0 0;background:#6bb28a}.progress-bars i:nth-child(1){height:27%}.progress-bars i:nth-child(2){height:49%;background:#8cbf48}.progress-bars i:nth-child(3){height:69%;background:#f1b044}.progress-bars i:nth-child(4){height:92%;background:#4a9d9a}.progress-star{position:absolute;right:20%;top:0;color:#d9a331;font-size:36px;text-shadow:0 3px 4px #47616b25}
 @media(max-width:950px){.hub-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hub-card{min-height:350px}}
 @media(max-width:560px){.resource-hub{padding:48px 16px 54px}.hub-grid{grid-template-columns:1fr;gap:17px}.hub-card{min-height:335px;padding:20px}.hub-art{height:132px}.hub-copy h3{font-size:28px}}
+
+/* Phase 4 account feedback: make the signed-in state unmistakable. */
+.account-session-badge{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex-shrink:0;padding:7px 10px;border-radius:999px;background:#e5f6e9;color:#17643a;font-size:.72rem;font-weight:800;letter-spacing:.04em}
+.account-profile{flex-wrap:wrap}
+.account-password-form{margin:18px 0;padding:16px;border:1px solid var(--line,#dce5e8);border-radius:14px;background:rgba(255,255,255,.72)}
+.account-password-form h4{margin:0 0 12px}
+.account-password-form .button{align-self:flex-start}
+#phase4Forgot{border:0;background:transparent;color:var(--primary,#287f68);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer;padding:5px}
+#phase4AccountForm button:disabled,#phase4PasswordForm button:disabled{opacity:.65;cursor:wait}
+@media(max-width:560px){.account-session-badge{width:100%;margin-top:8px}.account-password-form{padding:12px}}
