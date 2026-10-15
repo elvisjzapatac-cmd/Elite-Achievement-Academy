@@ -42,19 +42,10 @@ function applyLanguage() {
     if (translations[lang][key]) el.innerHTML = translations[lang][key];
   });
   $("languageToggle").textContent = lang === "es" ? "EN" : "ES";
-  $("menuToggle").setAttribute("aria-label", lang === "es" ? "Abrir menú" : "Open menu");
   $("quizHint").textContent = translations[lang].quizHint;
   renderQuestion();
 }
 $("languageToggle").addEventListener("click", () => { lang = lang === "es" ? "en" : "es"; applyLanguage(); renderPortal(); $("assignmentInput").placeholder = translations[lang].assignmentPlaceholder; });
-$("menuToggle").addEventListener("click", () => {
-  const open = $("mainNav").classList.toggle("open");
-  $("menuToggle").setAttribute("aria-expanded", String(open));
-});
-document.querySelectorAll("#mainNav a").forEach(a => a.addEventListener("click", () => {
-  $("mainNav").classList.remove("open"); $("menuToggle").setAttribute("aria-expanded","false");
-  document.querySelectorAll("#mainNav a").forEach(x => x.classList.remove("active")); a.classList.add("active");
-}));
 $("levelFilter").addEventListener("change", e => {
   const value = e.target.value;
   document.querySelectorAll(".subject-card").forEach(card => card.classList.toggle("hidden-card", value !== "all" && !card.dataset.levels.split(" ").includes(value)));
