@@ -15,3 +15,35 @@ html{scroll-behavior:smooth;scroll-padding-top:95px}body{background:#fffdf9;colo
 @media(max-width:1000px){.brand{min-width:0}.brand-copy strong{font-size:10px}.main-nav a{padding:8px 7px;font-size:11px}}
 @media(max-width:760px){.site-header{flex-wrap:wrap;padding:9px 13px;gap:8px}.brand{flex:1}.brand-mark{flex-basis:42px;width:42px;height:42px}.brand-copy strong{font-size:9px}.brand-copy small{font-size:8px}.menu-toggle{display:inline-flex;align-items:center;justify-content:center}.main-nav{display:none;order:5;flex:0 0 100%;width:100%;padding:8px 0 4px;flex-direction:column;align-items:stretch}.main-nav.open{display:flex}.main-nav a{padding:11px 14px;font-size:13px}.header-actions{margin-left:auto}}
 
+
+/* Logo oficial: imagen del escudo recortada para que se vea en el encabezado */
+.site-header .brand-mark{display:flex!important;align-items:center!important;justify-content:center!important;flex:0 0 58px!important;width:58px!important;height:58px!important;padding:0!important;overflow:hidden!important;border-radius:12px!important;background:#07343b!important;box-shadow:0 0 0 2px #d8b76a,0 4px 12px #07343b35!important}
+.site-header .brand-mark img{display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;object-position:center!important;mix-blend-mode:normal!important}
+@media(max-width:760px){.site-header .brand-mark{flex-basis:46px!important;width:46px!important;height:46px!important}}
+
+
+/* Requested remodel: remove the top navigation links, preserve the academy logo and language toggle */
+.site-header .main-nav{display:none!important}
+.site-header{grid-template-columns:1fr auto!important}
+.site-header .brand{min-width:0}
+.site-header .header-actions{display:flex!important;align-items:center;gap:10px}
+
+/* Children's library palette: pastel, friendly, high-contrast cards */
+#library,.library-section,.library-container{background:#fffaf0!important}
+#library .section-kicker,.library-section .section-kicker{color:#e58b45!important}
+#library .section-title,.library-section .section-title{color:#174b61!important}
+#library .book-card,.library-section .book-card{background:#fff!important;border:2px solid #f5dfb9!important;border-radius:22px!important;box-shadow:0 8px 18px rgba(54,91,107,.10)!important}
+#library .book-card:nth-child(4n+1),.library-section .book-card:nth-child(4n+1){background:#fff5e8!important;border-color:#ffd9ae!important}
+#library .book-card:nth-child(4n+2),.library-section .book-card:nth-child(4n+2){background:#f0fbff!important;border-color:#bde9f1!important}
+#library .book-card:nth-child(4n+3),.library-section .book-card:nth-child(4n+3){background:#f5f1ff!important;border-color:#d9ccff!important}
+#library .book-card:nth-child(4n),.library-section .book-card:nth-child(4n){background:#f1fff3!important;border-color:#c7ebcc!important}
+#library .book-cover,.library-section .book-cover{min-height:175px;border-radius:16px!important;background:linear-gradient(145deg,#fff1c9,#ffd9df)!important;color:#194e64!important;border:3px solid #fff!important;box-shadow:0 5px 12px rgba(48,82,98,.12)!important}
+#library .book-card:nth-child(4n+2) .book-cover,.library-section .book-card:nth-child(4n+2) .book-cover{background:linear-gradient(145deg,#d7f6ff,#bcebdc)!important}
+#library .book-card:nth-child(4n+3) .book-cover,.library-section .book-card:nth-child(4n+3) .book-cover{background:linear-gradient(145deg,#f0ddff,#ffe0ef)!important}
+#library .book-card:nth-child(4n) .book-cover,.library-section .book-card:nth-child(4n) .book-cover{background:linear-gradient(145deg,#e3ffd9,#fff0b8)!important}
+#library .book-card h3,.library-section .book-card h3{color:#174b61!important}
+#library .book-card p,.library-section .book-card p{color:#4d6675!important}
+#library .book-card button,.library-section .book-card button{background:#ffb44a!important;color:#513716!important;border:0!important;border-radius:999px!important;font-weight:800!important}
+#library input,#library select,.library-section input,.library-section select{border:2px solid #c9eaf0!important;border-radius:14px!important;background:#fff!important}
+#library .book-reader-panel,.book-reader-panel{border:4px solid #bde9f1!important;border-radius:24px!important;background:#fffaf2!important}
+#library .book-reader-head,.book-reader-head{background:#e1f7ff!important;border-color:#bde9f1!important}
