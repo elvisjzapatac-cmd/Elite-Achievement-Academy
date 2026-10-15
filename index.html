@@ -21,6 +21,7 @@
     <nav class="main-nav" id="mainNav">
       <a href="#home" data-i18n="navHome" class="active">Inicio</a>
       <a href="#subjects" data-i18n="navSubjects">Materias</a>
+      <a href="#library" data-i18n="navLibrary">Biblioteca</a>
       <a href="#worksheets" data-i18n="navWorksheets">Fichas</a>
       <a href="#practice" data-i18n="navPractice">Práctica</a>
       <a href="#portal" data-i18n="navPortal">Portal</a>
@@ -97,6 +98,21 @@
       </div>
     </section>
 
+    <section class="section section-light library-section" id="library">
+      <div class="section-heading">
+        <div><p class="eyebrow" data-i18n="libraryEyebrow">LECTURAS Y CONOCIMIENTO</p><h2 data-i18n="libraryTitle">Biblioteca digital</h2></div>
+        <p data-i18n="libraryDesc">Explora libros y cuentos reales de bibliotecas públicas y colecciones digitales autorizadas.</p>
+      </div>
+      <div class="library-note"><strong data-i18n="libraryNoteTitle">Lectura legal y responsable</strong><span data-i18n="libraryNote">Los libros se abren en sus bibliotecas originales. La disponibilidad de lectura o descarga depende de cada institución y de los derechos de cada obra.</span></div>
+      <div class="library-filters">
+        <label for="bookSearch" data-i18n="bookSearchLabel">Buscar título o autor</label><input id="bookSearch" type="search" placeholder="Ej. Alicia, Andersen..." data-i18n-placeholder="bookSearchPlaceholder">
+        <label for="bookLanguage" data-i18n="bookLanguageLabel">Idioma</label><select id="bookLanguage"><option value="all" data-i18n="bookAllLanguages">Todos</option><option value="es">Español</option><option value="en">English</option></select>
+        <label for="bookLevel" data-i18n="bookLevelLabel">Nivel</label><select id="bookLevel"><option value="all" data-i18n="bookAllLevels">Todos los niveles</option><option value="preschool" data-i18n="bookPreschool">Preescolar</option><option value="primary" data-i18n="bookPrimary">Primaria</option><option value="secondary" data-i18n="bookSecondary">Secundaria</option></select>
+      </div>
+      <div id="bookGrid" class="book-grid" aria-live="polite"></div>
+      <p class="library-source" data-i18n="librarySources">Fuentes: Biblioteca Virtual del Ministerio de Educación de República Dominicana, Biblioteca Virtual Miguel de Cervantes y Project Gutenberg.</p>
+    </section>
+
     <section class="section worksheets-section" id="worksheets">
       <div class="section-heading">
         <div><p class="eyebrow" data-i18n="worksheetsEyebrow">APRENDE CON PAPEL O PANTALLA</p><h2 data-i18n="worksheetsTitle">Fichas educativas</h2></div>
@@ -156,7 +172,7 @@
     </section>
   </main>
 
-  <footer class="site-footer"><a class="footer-brand" href="#home">ELITE ACHIEVEMENT ACADEMY</a><p data-i18n="footerMotto">Learn. Practice. Achieve.</p><small>© <span id="year"></span> Elite Achievement Academy. <span data-i18n="footerRights">Todos los derechos reservados.</span></small><small class="disclaimer" data-i18n="footerDisclaimer">Versión inicial de demostración. El progreso se guarda solo en este navegador.</small></footer>
+  <footer class="site-footer"><a class="footer-brand" href="#home">ELITE ACHIEVEMENT ACADEMY</a><p data-i18n="footerMotto">Learn. Practice. Achieve.</p><small>© <span id="year"></span> Elite Achievement Academy. <span data-i18n="footerRights">Todos los derechos reservados.</span></small><small class="disclaimer" data-i18n="footerDisclaimer">Versión en desarrollo. Las funciones de cuenta y progreso compartido requieren un backend seguro.</small></footer>
 
   <dialog id="activityDialog" class="activity-dialog">
     <div class="dialog-head"><div><p class="eyebrow" data-i18n="activityEyebrow">ACTIVIDAD EDUCATIVA</p><h2 id="dialogTitle">Actividad</h2></div><button id="closeDialog" class="close-dialog" aria-label="Close">×</button></div>
