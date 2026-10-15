@@ -10,7 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="theme.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
   <script src="app.js" defer></script>
+  <script src="phase4.js" defer></script>
 
 <style id="official-logo-fix">
 .site-header .brand-mark{display:flex!important;align-items:center!important;justify-content:center!important;width:68px!important;height:58px!important;flex:0 0 68px!important;overflow:hidden!important;padding:0!important;background:#07343b!important;border:2px solid #d8b76a!important;border-radius:12px!important;box-sizing:border-box!important}
@@ -190,6 +193,11 @@
         <div><p class="eyebrow" data-i18n="portalEyebrow">UN ESPACIO PARA CADA APRENDIZ</p><h2 data-i18n="portalTitle">Portal de la academia</h2></div>
         <p data-i18n="portalDesc">Explora una vista de demostración para estudiantes, docentes y administración.</p>
       </div>
+      <section class="progress-dashboard" id="progressDashboard" aria-labelledby="progressDashboardTitle">
+        <div class="progress-dashboard-head"><div><p class="eyebrow" id="progressEyebrow">FASE 4 · SEGUIMIENTO ACADÉMICO</p><h3 id="progressDashboardTitle">Mi progreso académico</h3><p id="progressDashboardDesc">Tus resultados se guardan de forma segura en tu cuenta.</p></div><button class="button button-small" id="refreshProgress" type="button">Actualizar</button></div>
+        <p class="progress-status" id="progressStatus" role="status" aria-live="polite">Inicia sesión para consultar tu progreso.</p>
+        <div class="progress-metrics" id="progressMetrics"></div><div class="progress-subjects" id="progressSubjects"></div><div class="progress-table-wrap" id="progressTableWrap"></div>
+      </section>
       <div class="portal-controls">
         <label for="roleSelect" data-i18n="roleLabel">Vista del portal</label>
         <select id="roleSelect"><option value="student" data-i18n="roleStudent">Estudiante</option><option value="teacher" data-i18n="roleTeacher">Profesor/a</option><option value="admin" data-i18n="roleAdmin">Administrador/a</option></select>
@@ -202,7 +210,7 @@
         <article class="portal-panel"><div class="panel-heading"><div><p class="eyebrow" data-i18n="assignmentsEyebrow">ORGANIZA EL APRENDIZAJE</p><h3 data-i18n="assignmentsTitle">Tareas de práctica</h3></div><span class="panel-icon">✎</span></div><form id="assignmentForm"><label for="assignmentInput" data-i18n="assignmentLabel">Añadir una tarea de demostración</label><div class="assignment-entry"><input id="assignmentInput" maxlength="100" required placeholder="Ej. Practicar las tablas del 3"><button class="button button-small" type="submit" data-i18n="addTask">Añadir</button></div></form><ul id="assignmentList" class="assignment-list"></ul></article>
         <article class="portal-panel"><div class="panel-heading"><div><p class="eyebrow" data-i18n="videoEyebrow">MIRA Y APRENDE</p><h3 data-i18n="videoTitle">Lecciones en video</h3></div><span class="panel-icon">▶</span></div><p data-i18n="videoDesc">Abre búsquedas educativas para encontrar videos adecuados a tu tema y nivel.</p><div class="video-links"><a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/results?search_query=matematicas+para+primaria+educativo" data-i18n="videoMath">Matemáticas</a><a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/results?search_query=lectura+comprension+para+ninos" data-i18n="videoReading">Lectura</a><a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/results?search_query=ciencias+naturales+para+estudiantes" data-i18n="videoScience">Ciencias</a></div></article>
       </div>
-      <p class="portal-disclaimer" data-i18n="portalDisclaimer">Prototipo local: las cuentas se guardan solo en este navegador y no son un sistema seguro de autenticación. No uses contraseñas ni datos personales reales. Para cuentas reales se necesita un servidor y una base de datos seguros.</p>
+      <p class="portal-disclaimer" data-i18n="portalDisclaimer">Las cuentas y el progreso requieren configurar Supabase. El acceso a los resultados se controla por perfil y políticas de la base de datos.</p>
     </section>
 
     <section class="section section-light about-section" id="about">
@@ -211,7 +219,7 @@
     </section>
   </main>
 
-  <footer class="site-footer"><a class="footer-brand" href="#home">ELITE ACHIEVEMENT ACADEMY</a><p data-i18n="footerMotto">Learn. Practice. Achieve.</p><small>© <span id="year"></span> Elite Achievement Academy. <span data-i18n="footerRights">Todos los derechos reservados.</span></small><small class="disclaimer" data-i18n="footerDisclaimer">Versión en desarrollo. Las funciones de cuenta y progreso compartido requieren un backend seguro.</small></footer>
+  <footer class="site-footer"><a class="footer-brand" href="#home">ELITE ACHIEVEMENT ACADEMY</a><p data-i18n="footerMotto">Learn. Practice. Achieve.</p><small>© <span id="year"></span> Elite Achievement Academy. <span data-i18n="footerRights">Todos los derechos reservados.</span></small><small class="disclaimer" data-i18n="footerDisclaimer">Plataforma en desarrollo. El progreso sincronizado requiere configurar Supabase.</small></footer>
 
   <dialog id="activityDialog" class="activity-dialog">
     <div class="dialog-head"><div><p class="eyebrow" data-i18n="activityEyebrow">ACTIVIDAD EDUCATIVA</p><h2 id="dialogTitle">Actividad</h2></div><button id="closeDialog" class="close-dialog" aria-label="Close">×</button></div>
