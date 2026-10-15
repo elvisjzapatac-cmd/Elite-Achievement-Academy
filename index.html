@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Elite Achievement Academy: practica, aprende y alcanza tus metas académicas.">
+  <title>Elite Achievement Academy | Learn. Practice. Achieve.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Elite Achievement Academy home">
+      <div class="brand-mark"><img src="assets/elite-achievement-academy-logo.png" alt="Elite Achievement Academy logo"></div>
+      <span class="brand-copy"><strong>ELITE ACHIEVEMENT ACADEMY</strong><small>ACADEMIC EXCELLENCE <b>EST. 2026</b></small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="main-nav" id="mainNav">
+      <a href="#home" data-i18n="navHome" class="active">Inicio</a>
+      <a href="#subjects" data-i18n="navSubjects">Materias</a>
+      <a href="#worksheets" data-i18n="navWorksheets">Fichas</a>
+      <a href="#practice" data-i18n="navPractice">Práctica</a>
+      <a href="#about" data-i18n="navAbout">Nosotros</a>
+    </nav>
+    <div class="header-actions">
+      <button class="text-button" id="languageToggle" aria-label="Switch language">EN</button>
+      <a href="#practice" class="button button-small" data-i18n="getStarted">Comenzar</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <p class="eyebrow" data-i18n="heroEyebrow">TU CAMINO HACIA LA EXCELENCIA</p>
+        <h1 data-i18n="heroTitle">Desbloquea tu <span>potencial académico</span></h1>
+        <p class="hero-lead" data-i18n="heroLead">Construye confianza con práctica guiada, recursos educativos y actividades para cada etapa.</p>
+        <div class="hero-actions">
+          <a href="#subjects" class="button" data-i18n="exploreSubjects">Explorar materias <span>→</span></a>
+          <a href="#practice" class="button button-outline" data-i18n="startPracticing">Empezar a practicar <span>→</span></a>
+        </div>
+        <div class="hero-proof"><span class="proof-icon">✦</span><span data-i18n="heroProof">Aprende a tu ritmo. Celebra cada avance.</span></div>
+      </div>
+      <div class="hero-art" aria-label="Academic study illustration">
+        <div class="art-glow"></div>
+        <div class="art-card">
+          <div class="art-topline"><span>ACADEMY • 2026</span><span>✦</span></div>
+          <div class="art-book">✧</div>
+          <div class="art-quote" data-i18n="artQuote">El conocimiento abre puertas.</div>
+          <div class="art-rule"></div>
+          <div class="art-small">LEARN · PRACTICE · ACHIEVE</div>
+        </div>
+        <div class="floating-note note-one"><span>✓</span><div><b data-i18n="noteProgress">¡Buen progreso!</b><small data-i18n="noteKeepGoing">Sigue así</small></div></div>
+        <div class="floating-note note-two"><span>★</span><div><b>+10 XP</b><small data-i18n="noteCompleted">Actividad completada</small></div></div>
+      </div>
+    </section>
+
+    <section class="stats-strip" aria-label="Academy features">
+      <div><span class="stat-icon">⌘</span><p><b data-i18n="feature1">Contenido útil</b><small data-i18n="feature1Sub">Actividades por nivel</small></p></div>
+      <div><span class="stat-icon">♢</span><p><b data-i18n="feature2">Tu progreso</b><small data-i18n="feature2Sub">Resultados en este dispositivo</small></p></div>
+      <div><span class="stat-icon">▣</span><p><b data-i18n="feature3">Aprende en cualquier lugar</b><small data-i18n="feature3Sub">Diseño adaptable</small></p></div>
+      <div><span class="stat-icon">☆</span><p><b data-i18n="feature4">Más confianza</b><small data-i18n="feature4Sub">Un paso a la vez</small></p></div>
+    </section>
+
+    <section class="section section-light" id="subjects">
+      <div class="section-heading">
+        <div><p class="eyebrow" data-i18n="subjectsEyebrow">DESCUBRE Y PRACTICA</p><h2 data-i18n="subjectsTitle">Explora tus materias</h2></div>
+        <p data-i18n="subjectsDesc">Elige un área, selecciona tu nivel y comienza a aprender.</p>
+      </div>
+      <div class="toolbar">
+        <label for="levelFilter" data-i18n="levelLabel">Nivel educativo</label>
+        <select id="levelFilter">
+          <option value="all" data-i18n="allLevels">Todos los niveles</option>
+          <option value="early" data-i18n="levelEarly">Inicial</option>
+          <option value="primary" data-i18n="levelPrimary">Primaria</option>
+          <option value="secondary" data-i18n="levelSecondary">Secundaria</option>
+        </select>
+      </div>
+      <div class="subject-grid" id="subjectGrid">
+        <article class="subject-card" data-levels="early primary secondary" data-subject="math">
+          <div class="subject-symbol symbol-math">＋<span>÷</span></div><div class="subject-copy"><span class="card-kicker" data-i18n="subjectMathKicker">LÓGICA Y NÚMEROS</span><h3 data-i18n="subjectMath">Matemáticas</h3><p data-i18n="subjectMathDesc">Desarrolla habilidades para resolver problemas paso a paso.</p><a href="#practice" class="subject-link" data-choose="math" data-i18n="explore">Explorar →</a></div>
+        </article>
+        <article class="subject-card" data-levels="early primary secondary" data-subject="reading">
+          <div class="subject-symbol symbol-reading">▤</div><div class="subject-copy"><span class="card-kicker" data-i18n="subjectReadingKicker">COMPRENSIÓN</span><h3 data-i18n="subjectReading">Lectura y escritura</h3><p data-i18n="subjectReadingDesc">Mejora comprensión, gramática, escritura y vocabulario.</p><a href="#practice" class="subject-link" data-choose="reading" data-i18n="explore">Explorar →</a></div>
+        </article>
+        <article class="subject-card" data-levels="primary secondary" data-subject="science">
+          <div class="subject-symbol symbol-science">⚛</div><div class="subject-copy"><span class="card-kicker" data-i18n="subjectScienceKicker">PREGUNTA Y DESCUBRE</span><h3 data-i18n="subjectScience">Ciencias</h3><p data-i18n="subjectScienceDesc">Explora la naturaleza, el espacio y cómo funciona el mundo.</p><a href="#practice" class="subject-link" data-choose="science" data-i18n="explore">Explorar →</a></div>
+        </article>
+        <article class="subject-card" data-levels="early primary secondary" data-subject="english">
+          <div class="subject-symbol symbol-english">Aa</div><div class="subject-copy"><span class="card-kicker" data-i18n="subjectEnglishKicker">LANGUAGE SKILLS</span><h3 data-i18n="subjectEnglish">Inglés</h3><p data-i18n="subjectEnglishDesc">Practica vocabulario, gramática y comprensión en inglés.</p><a href="#practice" class="subject-link" data-choose="english" data-i18n="explore">Explorar →</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section worksheets-section" id="worksheets">
+      <div class="section-heading">
+        <div><p class="eyebrow" data-i18n="worksheetsEyebrow">APRENDE CON PAPEL O PANTALLA</p><h2 data-i18n="worksheetsTitle">Fichas educativas</h2></div>
+        <p data-i18n="worksheetsDesc">Actividades sencillas para practicar, repasar e imprimir.</p>
+      </div>
+      <div class="worksheet-grid">
+        <article class="worksheet-card"><div class="worksheet-icon">01</div><div><span class="tag" data-i18n="tagMath">Matemáticas</span><h3 data-i18n="sheet1Title">Sumas rápidas</h3><p data-i18n="sheet1Desc">Practica operaciones básicas y comprueba tus respuestas.</p><button class="inline-action" data-worksheet="addition" data-i18n="openActivity">Abrir actividad ↗</button></div></article>
+        <article class="worksheet-card"><div class="worksheet-icon">02</div><div><span class="tag" data-i18n="tagEnglish">Inglés</span><h3 data-i18n="sheet2Title">Everyday vocabulary</h3><p data-i18n="sheet2Desc">Relaciona palabras cotidianas con su significado.</p><button class="inline-action" data-worksheet="vocabulary" data-i18n="openActivity">Abrir actividad ↗</button></div></article>
+        <article class="worksheet-card"><div class="worksheet-icon">03</div><div><span class="tag" data-i18n="tagReading">Lectura</span><h3 data-i18n="sheet3Title">Lee y comprende</h3><p data-i18n="sheet3Desc">Lee un texto corto y responde preguntas de comprensión.</p><button class="inline-action" data-worksheet="reading" data-i18n="openActivity">Abrir actividad ↗</button></div></article>
+      </div>
+    </section>
+
+    <section class="practice-section" id="practice">
+      <div class="practice-intro">
+        <p class="eyebrow" data-i18n="practiceEyebrow">TU MOMENTO DE APRENDER</p>
+        <h2 data-i18n="practiceTitle">Practica. Comprueba. Mejora.</h2>
+        <p data-i18n="practiceDesc">Responde una pregunta, recibe retroalimentación y construye tu confianza con cada intento.</p>
+        <div class="progress-summary"><div class="progress-ring"><span id="totalScore">0</span></div><div><b data-i18n="progressTitle">Puntos acumulados</b><small data-i18n="progressSubtitle">Guardados en este dispositivo</small></div></div>
+      </div>
+      <div class="quiz-card">
+        <div class="quiz-header"><span class="quiz-pill" id="quizSubject">MATEMÁTICAS</span><span id="questionCounter">1 / 5</span></div>
+        <div class="quiz-progress"><span id="quizProgressBar"></span></div>
+        <div id="quizContent">
+          <h3 id="questionText">¿Cuánto es 7 + 5?</h3>
+          <div class="answer-list" id="answerList"></div>
+          <p class="feedback" id="feedback" aria-live="polite"></p>
+          <div class="quiz-footer"><span id="quizHint">Elige una respuesta.</span><button class="button button-small" id="nextQuestion" disabled data-i18n="checkNext">Siguiente →</button></div>
+        </div>
+        <div id="quizResult" class="quiz-result hidden"><div class="result-medal">✦</div><h3 data-i18n="quizFinished">¡Actividad completada!</h3><p id="resultText"></p><button class="button" id="restartQuiz" data-i18n="tryAgain">Practicar otra vez</button></div>
+      </div>
+    </section>
+
+    <section class="section section-light about-section" id="about">
+      <div class="about-emblem">✦</div><div><p class="eyebrow" data-i18n="aboutEyebrow">NUESTRA FILOSOFÍA</p><h2 data-i18n="aboutTitle">La excelencia se construye un día a la vez.</h2><p data-i18n="aboutDesc">Elite Achievement Academy es un proyecto educativo diseñado para hacer que la práctica sea clara, accesible y motivadora. Aprende a tu ritmo y celebra el progreso, no solo el resultado.</p></div>
+      <div class="about-values"><div><b>01</b><span data-i18n="value1">Aprendizaje claro</span></div><div><b>02</b><span data-i18n="value2">Práctica constante</span></div><div><b>03</b><span data-i18n="value3">Progreso personal</span></div></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="footer-brand" href="#home">ELITE ACHIEVEMENT ACADEMY</a><p data-i18n="footerMotto">Learn. Practice. Achieve.</p><small>© <span id="year"></span> Elite Achievement Academy. <span data-i18n="footerRights">Todos los derechos reservados.</span></small><small class="disclaimer" data-i18n="footerDisclaimer">Versión inicial de demostración. El progreso se guarda solo en este navegador.</small></footer>
+
+  <dialog id="activityDialog" class="activity-dialog">
+    <div class="dialog-head"><div><p class="eyebrow" data-i18n="activityEyebrow">ACTIVIDAD EDUCATIVA</p><h2 id="dialogTitle">Actividad</h2></div><button id="closeDialog" class="close-dialog" aria-label="Close">×</button></div>
+    <div id="dialogBody"></div>
+    <div class="dialog-actions"><button class="button button-outline dark-outline" id="printActivity" data-i18n="printSheet">Imprimir ficha</button><button class="button" id="dialogPractice" data-i18n="practiceNow">Practicar ahora →</button></div>
+  </dialog>
+</body>
+</html>
