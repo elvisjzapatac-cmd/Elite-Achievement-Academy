@@ -21,6 +21,25 @@ const translations = {
   }
 };
 
+// Ensure the library has complete translations in both languages.
+Object.assign(translations.en, {
+  libraryEyebrow:"READING AND KNOWLEDGE", libraryTitle:"Digital library",
+  libraryDesc:"Explore books and stories from public libraries and authorized digital collections.",
+  libraryNoteTitle:"Legal and responsible reading",
+  libraryNote:"Books open on their original library websites. Reading or download availability depends on each institution and the rights for each work.",
+  bookSearchLabel:"Search title or author", bookSearchPlaceholder:"e.g. Alice, Andersen...",
+  bookLanguageLabel:"Language", bookAllLanguages:"All languages", bookLevelLabel:"Level",
+  bookAllLevels:"All levels", bookPreschool:"Preschool", bookPrimary:"Primary", bookSecondary:"Secondary",
+  librarySources:"Sources: Project Gutenberg and Wikisource, with additional catalog records from the Miguel de Cervantes Virtual Library.",
+  bookOpen:"Open book ↗", bookSource:"Source library", bookSpanish:"Spanish", bookEnglish:"English",
+  bookNoResults:"No books match these filters. Try another search."
+});
+Object.assign(translations.es, {
+  libraryEyebrow:"LECTURAS Y CONOCIMIENTO", libraryTitle:"Biblioteca digital",
+  bookOpen:"Abrir libro ↗", bookSpanish:"Español", bookEnglish:"Inglés",
+  bookNoResults:"No encontramos libros con esos filtros. Prueba otra búsqueda."
+});
+
 const questions = [
   {subject:"math", label:{es:"MATEMÁTICAS",en:"MATHEMATICS"}, q:{es:"¿Cuánto es 7 + 5?",en:"What is 7 + 5?"}, a:["10","11","12","13"], correct:2},
   {subject:"english", label:{es:"INGLÉS",en:"ENGLISH"}, q:{es:'¿Qué significa "apple"?',en:'What does "apple" mean in Spanish?'}, a:["Naranja / Orange","Manzana / Apple","Uva / Grape","Pera / Pear"], correct:1},
@@ -42,6 +61,8 @@ function applyLanguage() {
     if (translations[lang][key]) el.innerHTML = translations[lang][key];
   });
   $("languageToggle").textContent = lang === "es" ? "EN" : "ES";
+  const bookSearch = $("bookSearch");
+  if (bookSearch) bookSearch.placeholder = translations[lang].bookSearchPlaceholder;
   $("quizHint").textContent = translations[lang].quizHint;
   renderQuestion();
 }
@@ -197,9 +218,8 @@ function renderLibrary(){
  const q=($("bookSearch").value||"").trim().toLocaleLowerCase();
  const language=$("bookLanguage").value, level=$("bookLevel").value;
  const books=digitalBooks.filter(b=>(language==="all"||b.language===language)&&(level==="all"||b.level===level)&&(`${b.title} ${b.author} ${b.subject} ${b.source}`).toLocaleLowerCase().includes(q));
- grid.innerHTML=books.map((b,i)=>`<article class="book-card"><div class="book-cover ${b.language==='en'?'cover-blue':'cover-gold'}"><span>${b.language==='en'?'EN':'ES'}</span><strong>${escapeHTML(b.title)}</strong><small>${escapeHTML(b.author)}</small></div><div class="book-details"><div class="book-meta"><span>${b.language==='en'?translations[lang].bookEnglish:translations[lang].bookSpanish}</span><span>${translations[lang][b.level==='secondary'?'bookSecondary':'bookPrimary']}</span></div><h3>${escapeHTML(b.title)}</h3><p class="book-author">${escapeHTML(b.author)}</p><p>${escapeHTML(b.note)}</p><small class="book-source">${escapeHTML(b.source)}</small><button class="button button-small" type="button" data-read-book="${i}">${lang==="es"?"Leer aquí 📖":"Read here 📖"}</button></div></article>`).join("");
+ grid.innerHTML=books.map(b=>`<article class="book-card"><div class="book-cover ${b.language==='en'?'cover-blue':'cover-gold'}"><span>${b.language==='en'?'EN':'ES'}</span><strong>${escapeHTML(b.title)}</strong><small>${escapeHTML(b.author)}</small></div><div class="book-details"><div class="book-meta"><span>${b.language==='en'?translations[lang].bookEnglish:translations[lang].bookSpanish}</span><span>${translations[lang][b.level==='secondary'?'bookSecondary':'bookPrimary']}</span></div><h3>${escapeHTML(b.title)}</h3><p class="book-author">${escapeHTML(b.author)}</p><p>${escapeHTML(b.note)}</p><small class="book-source">${escapeHTML(b.source)}</small><a class="button button-small book-open-link" href="${b.url}" target="_blank" rel="noopener noreferrer">${translations[lang].bookOpen}</a></div></article>`).join("");
  if(!books.length) grid.innerHTML=`<p class="book-empty">${translations[lang].bookNoResults}</p>`;
- grid.querySelectorAll("[data-read-book]").forEach(btn=>btn.addEventListener("click",()=>openBookReader(books[Number(btn.dataset.readBook)])));
 }
 function openBookReader(book){
  let modal=document.getElementById("bookReaderModal");
