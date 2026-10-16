@@ -103,6 +103,37 @@
   $('nextQuestion')?.addEventListener('click',()=>{if(currentQuestion===activeQuestions.length-1&&chosenAnswer!==null)saveQuiz();});
   $('restartQuiz')?.addEventListener('click',()=>{answers=[];savedQuiz=false;});
   document.querySelectorAll('[data-choose]').forEach(el=>el.addEventListener('click',()=>{answers=[];savedQuiz=false;}));
+  // Phase 5: save completed worksheets to the signed-in student's Supabase progress.
+  window.addEventListener('eaa:worksheet-completed', async (event) => {
+    const dialog = $('activityDialog');
+    const detail = event.detail || {};
+    const status = $('progressStatus');
+    if (!dialog || dialog.dataset.worksheetSaved === 'true' || dialog.dataset.worksheetSaving === 'true') return;
+    if (!db || !user || !profile || profile.role !== 'student') {
+      if (status) status.textContent = es() ? 'Inicia sesión como estudiante para guardar esta ficha en tu progreso.' : 'Sign in as a student to save this worksheet to your progress.';
+      return;
+    }
+    dialog.dataset.worksheetSaving = 'true';
+    try {
+      const { error } = await db.from('progress_records').insert({
+        student_id: user.id,
+        subject: ['math','english','reading'].includes(detail.subject) ? detail.subject : 'mixed',
+        activity: `Ficha educativa · ${String(detail.title || 'Actividad').slice(0, 100)}`,
+        score: Math.max(0, Math.min(Number(detail.score) || 0, Number(detail.total) || 1)),
+        total: Math.max(1, Number(detail.total) || 1),
+        points: Math.max(0, Number(detail.score) || 0) * 10
+      });
+      if (error) throw error;
+      dialog.dataset.worksheetSaved = 'true';
+      if (status) status.textContent = es() ? '¡Ficha guardada en tu progreso académico!' : 'Worksheet saved to your academic progress!';
+      await loadProgress();
+    } catch (error) {
+      if (status) status.textContent = copy().saveError;
+      console.error('No se pudo guardar la ficha educativa:', error);
+    } finally {
+      dialog.dataset.worksheetSaving = 'false';
+    }
+  });
   $('refreshProgress')?.addEventListener('click',loadProgress);
   // Override the prototype's local-only account UI before the page is interactive.
   renderAccountArea=renderAccount;
