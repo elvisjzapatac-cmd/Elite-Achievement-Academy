@@ -49,6 +49,8 @@ const questions = [
 ];
 
 let lang = "es", currentQuestion = 0, chosenAnswer = null, correctCount = 0;
+let activeQuestions = questions.slice();
+let activeQuizSubject = null;
 let score = Number(localStorage.getItem("eaa-score") || 0);
 const $ = (id) => document.getElementById(id);
 $("year").textContent = new Date().getFullYear();
@@ -71,22 +73,31 @@ $("levelFilter").addEventListener("change", e => {
   const value = e.target.value;
   document.querySelectorAll(".subject-card").forEach(card => card.classList.toggle("hidden-card", value !== "all" && !card.dataset.levels.split(" ").includes(value)));
 });
+function startQuiz(subject = null) {
+  activeQuizSubject = subject;
+  activeQuestions = subject ? questions.filter(q => q.subject === subject) : questions.slice();
+  currentQuestion = 0;
+  chosenAnswer = null;
+  correctCount = 0;
+  $("quizResult").classList.add("hidden");
+  $("quizContent").classList.remove("hidden");
+  renderQuestion();
+}
 document.querySelectorAll("[data-choose]").forEach(a => a.addEventListener("click", () => {
   const subject = a.dataset.choose;
-  const idx = questions.findIndex(q => q.subject === subject);
-  if (idx >= 0) { currentQuestion = idx; chosenAnswer = null; correctCount = 0; $("quizResult").classList.add("hidden"); $("quizContent").classList.remove("hidden"); renderQuestion(); }
+  if (questions.some(q => q.subject === subject)) startQuiz(subject);
 }));
 function renderQuestion() {
-  const q = questions[currentQuestion];
+  const q = activeQuestions[currentQuestion];
   if (!q) return;
   $("quizSubject").textContent = q.label[lang];
-  $("questionCounter").textContent = `${currentQuestion + 1} / ${questions.length}`;
+  $("questionCounter").textContent = `${currentQuestion + 1} / ${activeQuestions.length}`;
   $("questionText").textContent = q.q[lang];
-  $("quizProgressBar").style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+  $("quizProgressBar").style.width = `${((currentQuestion + 1) / activeQuestions.length) * 100}%`;
   $("answerList").innerHTML = "";
   $("feedback").textContent = ""; $("feedback").className = "feedback";
   $("nextQuestion").disabled = true;
-  $("nextQuestion").textContent = currentQuestion === questions.length - 1 ? (lang === "es" ? "Ver resultado →" : "See results →") : translations[lang].checkNext;
+  $("nextQuestion").textContent = currentQuestion === activeQuestions.length - 1 ? (lang === "es" ? "Ver resultado →" : "See results →") : translations[lang].checkNext;
   $("quizHint").textContent = translations[lang].quizHint;
   q.a.forEach((answer, i) => {
     const btn = document.createElement("button"); btn.className = "answer-option"; btn.textContent = answer;
@@ -96,7 +107,7 @@ function renderQuestion() {
 function selectAnswer(index) {
   if (chosenAnswer !== null) return;
   chosenAnswer = index;
-  const q = questions[currentQuestion], buttons = [...$("answerList").children];
+  const q = activeQuestions[currentQuestion], buttons = [...$("answerList").children];
   buttons.forEach((btn, i) => { btn.disabled = true; if (i === q.correct) btn.classList.add("correct"); if (i === index && i !== q.correct) btn.classList.add("incorrect"); });
   const good = index === q.correct;
   if (good) { correctCount++; score += 10; localStorage.setItem("eaa-score", String(score)); $("totalScore").textContent = score; }
@@ -107,13 +118,13 @@ function selectAnswer(index) {
 }
 $("nextQuestion").addEventListener("click", () => {
   if (chosenAnswer === null) return;
-  if (currentQuestion < questions.length - 1) { currentQuestion++; chosenAnswer = null; renderQuestion(); }
+  if (currentQuestion < activeQuestions.length - 1) { currentQuestion++; chosenAnswer = null; renderQuestion(); }
   else {
     $("quizContent").classList.add("hidden"); $("quizResult").classList.remove("hidden");
-    $("resultText").textContent = `${translations[lang].resultPrefix} ${correctCount} ${translations[lang].resultMiddle} ${questions.length} ${translations[lang].resultSuffix}`;
+    $("resultText").textContent = `${translations[lang].resultPrefix} ${correctCount} ${translations[lang].resultMiddle} ${activeQuestions.length} ${translations[lang].resultSuffix}`;
   }
 });
-$("restartQuiz").addEventListener("click", () => { currentQuestion = 0; chosenAnswer = null; correctCount = 0; $("quizResult").classList.add("hidden"); $("quizContent").classList.remove("hidden"); renderQuestion(); });
+$("restartQuiz").addEventListener("click", () => startQuiz(activeQuizSubject));
 
 const dialog = $("activityDialog");
 const activityTemplates = {
@@ -132,7 +143,7 @@ document.querySelectorAll("[data-worksheet]").forEach(btn => btn.addEventListene
 $("closeDialog").addEventListener("click", () => dialog.close());
 dialog.addEventListener("click", e => { if (e.target === dialog) dialog.close(); });
 $("printActivity").addEventListener("click", () => window.print());
-$("dialogPractice").addEventListener("click", () => { dialog.close(); $("practice").scrollIntoView({behavior:"smooth"}); currentQuestion = 0; chosenAnswer = null; correctCount = 0; $("quizResult").classList.add("hidden"); $("quizContent").classList.remove("hidden"); renderQuestion(); });
+$("dialogPractice").addEventListener("click", () => { dialog.close(); $("practice").scrollIntoView({behavior:"smooth"}); startQuiz(null); });
 
 // Phase 1 portal translations and local demo features.
 Object.assign(translations.es, {

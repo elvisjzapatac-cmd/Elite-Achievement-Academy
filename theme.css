@@ -209,3 +209,32 @@ body{background:#fffdf7;color:#103d30}
 .stats-strip{display:none!important}
 @media(max-width:820px){.site-header{gap:10px}.landing-layout{gap:16px}.main-nav{background:#003a2d!important}.main-nav a{color:#fff3c7!important}}
 @media(max-width:560px){.site-header{padding:10px 12px}.hero{border-radius:16px!important}.resource-hub{margin-top:18px}}
+
+
+/* Phase 5 quality fixes: resilient quiz state and narrow-screen layouts. */
+.quiz-card,.quiz-content,.quiz-footer,.portal-card,.portal-controls,.assignment-form{min-width:0;max-width:100%;}
+#questionText,#resultText,.quiz-hint,.portal-notice,.portal-card p{overflow-wrap:anywhere;}
+.answer-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+.answer-option{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere;}
+#assignmentList{padding-inline-start:1.25rem;}
+#assignmentList li{display:flex;align-items:center;gap:10px;min-width:0;flex-wrap:wrap;}
+#assignmentList li span{flex:1 1 180px;min-width:0;overflow-wrap:anywhere;}
+#assignmentList input[type=checkbox]{flex:0 0 auto;width:20px;height:20px;}
+.task-remove{flex:0 0 auto;}
+.progress-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.progress-table-scroll table{min-width:520px;}
+button:disabled{cursor:not-allowed;opacity:.65;transform:none!important;}
+@media(max-width:560px){
+  .answer-list{grid-template-columns:minmax(0,1fr);}
+  .quiz-card{width:100%;padding:clamp(14px,4vw,22px);}
+  .quiz-header,.quiz-footer{gap:10px;flex-wrap:wrap;}
+  .quiz-footer{align-items:stretch;}
+  .quiz-footer button{width:100%;white-space:normal;}
+  .portal-controls{align-items:stretch;}
+  .portal-controls select,.portal-controls button,#assignmentForm input,#assignmentForm button{width:100%;max-width:100%;}
+  #assignmentForm{display:flex;flex-wrap:wrap;gap:10px;}
+  #assignmentForm label{flex:1 1 100%;min-width:0;}
+  #assignmentForm input{box-sizing:border-box;}
+  .dialog-actions{display:flex;flex-direction:column;}
+  .dialog-actions .button{width:100%;}
+}

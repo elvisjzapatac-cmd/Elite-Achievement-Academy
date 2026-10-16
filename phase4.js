@@ -91,15 +91,16 @@
     }
   }
   async function saveQuiz(){
-    if(savedQuiz)return;savedQuiz=true;if(!db||!user||!profile||profile.role!=='student')return;
+    if(savedQuiz || !db || !user || !profile || profile.role!=='student')return;
     const result=answers.filter(Boolean);if(!result.length)return;
-    for(const a of result){const {error}=await db.rpc('record_quiz_answer',{question_number:a.question,selected_option:a.selectedOption});if(error){const st=$('progressStatus');if(st)st.textContent=copy().saveError;return;}}await loadProgress();
+    savedQuiz=true;
+    for(const a of result){const {error}=await db.rpc('record_quiz_answer',{question_number:a.question,selected_option:a.selectedOption});if(error){savedQuiz=false;const st=$('progressStatus');if(st)st.textContent=copy().saveError;return;}}await loadProgress();
   }
-  // Capture answers without changing the original quiz appearance or question flow.
+  // Capture each answer by its original question number, even in subject-specific quizzes.
   if(typeof selectAnswer==='function'){
-    const original=selectAnswer;selectAnswer=function(i){const q=questions[currentQuestion];answers[currentQuestion]={subject:q?.subject||'mixed',correct:q?.correct===i,selectedOption:i,question:currentQuestion+1};return original(i);};
+    const original=selectAnswer;selectAnswer=function(i){const q=activeQuestions[currentQuestion];const originalNumber=questions.indexOf(q)+1;answers[currentQuestion]={subject:q?.subject||'mixed',correct:q?.correct===i,selectedOption:i,question:originalNumber};return original(i);};
   }
-  $('nextQuestion')?.addEventListener('click',()=>{if(currentQuestion===questions.length-1&&chosenAnswer!==null)saveQuiz();});
+  $('nextQuestion')?.addEventListener('click',()=>{if(currentQuestion===activeQuestions.length-1&&chosenAnswer!==null)saveQuiz();});
   $('restartQuiz')?.addEventListener('click',()=>{answers=[];savedQuiz=false;});
   document.querySelectorAll('[data-choose]').forEach(el=>el.addEventListener('click',()=>{answers=[];savedQuiz=false;}));
   $('refreshProgress')?.addEventListener('click',loadProgress);
