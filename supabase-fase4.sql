@@ -19,6 +19,8 @@ create table if not exists public.progress_records (
  activity text not null default '', score integer not null check(score>=0), total integer not null check(total>0 and score<=total),
  points integer not null default 0 check(points>=0), created_at timestamptz not null default now()
 );
+alter table public.progress_records drop constraint if exists progress_records_subject_check;
+alter table public.progress_records add constraint progress_records_subject_check check(subject in ('math','english','science','reading','social','geography','technology','art','mixed'));
 create index if not exists progress_records_student_created_idx on public.progress_records(student_id,created_at desc);
 create index if not exists teacher_students_student_idx on public.teacher_students(student_id);
 create or replace function public.current_profile_role() returns text language sql stable security definer set search_path=public
@@ -56,10 +58,45 @@ begin
   if selected_option < 0 or selected_option > 3 then raise exception 'Invalid answer option'; end if;
   case question_number
     when 1 then v_subject := 'math'; v_correct := 2;
-    when 2 then v_subject := 'english'; v_correct := 1;
-    when 3 then v_subject := 'science'; v_correct := 1;
-    when 4 then v_subject := 'reading'; v_correct := 0;
+    when 2 then v_subject := 'math'; v_correct := 2;
+    when 3 then v_subject := 'math'; v_correct := 1;
+    when 4 then v_subject := 'math'; v_correct := 2;
     when 5 then v_subject := 'math'; v_correct := 2;
+    when 6 then v_subject := 'english'; v_correct := 1;
+    when 7 then v_subject := 'english'; v_correct := 1;
+    when 8 then v_subject := 'english'; v_correct := 2;
+    when 9 then v_subject := 'english'; v_correct := 1;
+    when 10 then v_subject := 'english'; v_correct := 2;
+    when 11 then v_subject := 'science'; v_correct := 1;
+    when 12 then v_subject := 'science'; v_correct := 1;
+    when 13 then v_subject := 'science'; v_correct := 2;
+    when 14 then v_subject := 'science'; v_correct := 1;
+    when 15 then v_subject := 'science'; v_correct := 1;
+    when 16 then v_subject := 'reading'; v_correct := 0;
+    when 17 then v_subject := 'reading'; v_correct := 1;
+    when 18 then v_subject := 'reading'; v_correct := 1;
+    when 19 then v_subject := 'reading'; v_correct := 2;
+    when 20 then v_subject := 'reading'; v_correct := 2;
+    when 21 then v_subject := 'social'; v_correct := 0;
+    when 22 then v_subject := 'social'; v_correct := 1;
+    when 23 then v_subject := 'social'; v_correct := 0;
+    when 24 then v_subject := 'social'; v_correct := 0;
+    when 25 then v_subject := 'social'; v_correct := 0;
+    when 26 then v_subject := 'geography'; v_correct := 1;
+    when 27 then v_subject := 'geography'; v_correct := 0;
+    when 28 then v_subject := 'geography'; v_correct := 2;
+    when 29 then v_subject := 'geography'; v_correct := 2;
+    when 30 then v_subject := 'geography'; v_correct := 2;
+    when 31 then v_subject := 'technology'; v_correct := 0;
+    when 32 then v_subject := 'technology'; v_correct := 0;
+    when 33 then v_subject := 'technology'; v_correct := 2;
+    when 34 then v_subject := 'technology'; v_correct := 1;
+    when 35 then v_subject := 'technology'; v_correct := 0;
+    when 36 then v_subject := 'art'; v_correct := 0;
+    when 37 then v_subject := 'art'; v_correct := 0;
+    when 38 then v_subject := 'art'; v_correct := 0;
+    when 39 then v_subject := 'art'; v_correct := 0;
+    when 40 then v_subject := 'art'; v_correct := 0;
     else raise exception 'Invalid question number';
   end case;
   insert into public.progress_records(student_id,subject,activity,score,total,points)
