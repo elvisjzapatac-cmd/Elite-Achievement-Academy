@@ -251,3 +251,19 @@ button:disabled{cursor:not-allowed;opacity:.65;transform:none!important;}
   .quiz-footer button { max-width: 100%; }
   .quiz-card h3 { font-size: clamp(20px, 6vw, 24px); overflow-wrap: anywhere; }
 }
+
+/* Fichas educativas: campos de respuesta y estado real de corrección */
+.activity-content{color:#244b54;line-height:1.65}
+.activity-content h3{margin:20px 0 10px;color:#12485b}
+.worksheet-questions{display:grid;gap:13px;padding-left:24px}
+.worksheet-questions li{padding:8px 0}
+.worksheet-answer{display:inline-block;max-width:100%;min-width:115px;margin:5px 8px;padding:10px 12px;border:1.5px solid #c9dcd8;border-radius:11px;background:#fff;color:#183f48;font:inherit}
+.worksheet-questions input.worksheet-answer{width:125px}
+.worksheet-reading-label{display:flex;flex-direction:column;align-items:flex-start;gap:7px}
+.worksheet-reflection{display:block;box-sizing:border-box;width:100%;padding:12px;border:1.5px solid #c9dcd8;border-radius:12px;font:inherit;resize:vertical}
+.worksheet-answer.answer-correct{border-color:#329b64;background:#effaf2}
+.worksheet-answer.answer-incorrect{border-color:#d66c61;background:#fff3f1}
+.worksheet-feedback{margin-top:18px;padding:14px 16px;border-radius:14px;font-weight:800;line-height:1.5}
+.worksheet-feedback.is-complete{background:#e5f7e9;border:1px solid #9bd4a9;color:#17643a}
+.worksheet-feedback.needs-work{background:#fff4df;border:1px solid #f0d08b;color:#7d5411}
+@media(max-width:560px){.worksheet-answer{box-sizing:border-box;width:100%;margin:6px 0}.worksheet-questions input.worksheet-answer{width:100%}.activity-dialog{width:calc(100% - 24px);box-sizing:border-box}}
