@@ -104,3 +104,108 @@ html{scroll-behavior:smooth;scroll-padding-top:95px}body{background:#fffdf9;colo
 .progress-subjects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}.progress-subject{padding:14px 15px;border:1px solid #e0eae7;border-radius:15px;background:#fff}.progress-subject>div:first-child{display:flex;justify-content:space-between;gap:12px;color:#254e56}.progress-subject>div:first-child span{font-weight:900;color:#247a63}.progress-track{height:8px;margin:10px 0 7px;border-radius:999px;background:#e8efec;overflow:hidden}.progress-track span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#62a982,#e8b64c)}.progress-subject small{color:#718185}
 .progress-empty{padding:18px;border:1px dashed #cdded8;border-radius:14px;background:#ffffffa8;color:#647a7c}.progress-table-wrap{margin-top:18px}.progress-table-wrap h4{margin:0 0 10px;color:#184653;font-size:1rem}.progress-table-scroll{overflow-x:auto;border:1px solid #e0eae7;border-radius:14px;background:#fff}.progress-table-scroll table{width:100%;border-collapse:collapse;min-width:620px;text-align:left;font-size:.87rem}.progress-table-scroll th,.progress-table-scroll td{padding:11px 13px;border-bottom:1px solid #edf2f0}.progress-table-scroll th{background:#f2f8f5;color:#31565c;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}.progress-table-scroll td{color:#486267}.progress-table-scroll tr:last-child td{border-bottom:0}
 @media(max-width:650px){.progress-dashboard{padding:16px;border-radius:19px}.progress-dashboard-head{flex-direction:column}.progress-metrics,.progress-subjects{grid-template-columns:1fr}.progress-metric{padding:12px 14px}}
+
+
+/* ELITE ACHIEVEMENT ACADEMY — green & gold landing redesign (preserves existing sections and IDs) */
+:root{
+  --ink:#073b30;--muted:#59736a;--teal:#064b3b;--cream:#fffdf6;--orange:#f0c84b;--green:#168348;--sky:#dff3f7;
+  --line:#eadfae;--shadow:0 12px 32px rgba(4,49,37,.10);--radius:22px;
+}
+html{scroll-padding-top:100px}
+body{background:#fffdf8;color:#092f27}
+.site-header{position:sticky;top:0;z-index:50;background:linear-gradient(115deg,#003c2e,#00503b 60%,#003529);border-bottom:3px solid #d8b44b;box-shadow:0 7px 24px #003c2e20;color:#fff;padding:10px clamp(14px,2.8vw,38px)}
+.brand-mark{background:#003b2e!important;border:1.5px solid #e2bd55!important;border-radius:12px!important;box-shadow:0 5px 16px #001f183d!important}
+.brand-copy strong{color:#f7e6a4!important}.brand-copy small{color:#e7d99e!important}
+.main-nav{gap:4px}.main-nav a{color:#fff7d6;border-radius:12px;padding:10px 12px;font-weight:750}
+.main-nav a:hover,.main-nav a.active{background:linear-gradient(135deg,#f9df7c,#e9bd43);color:#063c2f}
+.header-actions .text-button,.menu-toggle{background:#064b3b;color:#ffe9a2;border:1px solid #d7b94e;border-radius:12px}
+.landing-layout{width:min(1480px,calc(100% - 44px));margin:24px auto 22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(270px,330px);grid-template-areas:"hero account";align-items:stretch;gap:24px}
+.landing-layout>.hero{grid-area:hero;width:100%;max-width:none;margin:0;min-height:330px;padding:clamp(26px,3.5vw,52px);border-radius:22px;overflow:hidden;background:radial-gradient(ellipse at 80% 20%,#0c6549 0%,transparent 42%),linear-gradient(125deg,#002f25,#00513a 65%,#00392c);border:1px solid #c5a33f;box-shadow:0 16px 34px #003d2c20;color:#fffdf0}
+.landing-layout>.hero:before{content:"";position:absolute;inset:auto -5% -35% 30%;height:65%;transform:rotate(-8deg);background:linear-gradient(90deg,transparent,#d3a934,#ffdf77,#b58b24,transparent);opacity:.9;pointer-events:none}
+.hero .eyebrow{color:#f1d36c}.hero h1{color:#fff9df}.hero h1 span{color:#f6d365}.hero-lead{color:#fffdf0}.hero-proof{color:#f8e7a5}
+.button,.hub-button{background:linear-gradient(135deg,#ffe27b,#e9b83b)!important;color:#083c2e!important;border:1px solid #ffe69a!important;box-shadow:0 4px 0 #a98121!important;font-weight:900}
+.button:hover,.hub-button:hover{box-shadow:0 6px 0 #a98121!important}
+.button-outline{background:transparent!important;color:#fff5c8!important;border:1px solid #e6c75a!important;box-shadow:none!important}
+.hero-art .art-card{background:linear-gradient(145deg,#075440,#003126);border:1px solid #d5b447;box-shadow:0 20px 45px #001b15a8;color:#ffe7a0}
+.hero-art .art-topline,.hero-art .art-small{color:#f3d66f}.hero-art .art-book{color:#f2d15e}.hero-art .art-rule{background:#d9b84e}
+.landing-layout>.account-entry-section{grid-area:account;width:100%;max-width:none;margin:0;padding:0;align-self:stretch;background:transparent;border:0;box-shadow:none;display:flex;flex-direction:column;gap:0}
+.account-entry-heading{display:none!important}
+.account-entry-section .account-panel{height:100%;padding:22px 20px;border:1px solid #e6d8a4;border-radius:22px;background:#fffefa;box-shadow:0 12px 28px #103d2c15;align-self:stretch}
+.account-panel-heading{padding:15px;margin:-22px -20px 18px;border-radius:21px 21px 14px 14px;background:linear-gradient(120deg,#003d2f,#006044);color:#fff7d7;border-bottom:3px solid #e3bf4f}
+.account-panel-heading .eyebrow{color:#f3d66f}.account-panel-heading h3{color:#fff8df}
+.account-icon{background:#f3d267!important;color:#064432!important;border:2px solid #fff0a9!important}
+.account-entry-section .account-form input,.account-entry-section .account-form select,.account-entry-section .account-form textarea{border-color:#d8e5d8;border-radius:12px;background:#fff}
+.account-entry-section .account-form input:focus,.account-entry-section .account-form select:focus{outline:2px solid #d7b94e;outline-offset:1px}
+.account-entry-section .account-details>div{background:#f5f8ef;border-color:#e0e8d5;border-radius:12px}
+.account-entry-section .account-details dt{color:#587366}.account-entry-section .account-details dd{color:#064b39}
+.stats-strip{display:none!important}
+.resource-hub{width:min(1480px,calc(100% - 44px));margin:22px auto 38px;padding:0}
+.hub-heading{text-align:left;margin:0 0 18px}.hub-heading h2{color:#064b39}.hub-heading .eyebrow{color:#997515}
+.hub-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.hub-card{min-width:0;border-radius:20px;border:1px solid #e6e0c9;background:#fffdf8;box-shadow:0 8px 20px #173f3010;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.hub-card:hover{transform:translateY(-4px);box-shadow:0 14px 28px #173f3020}
+.hub-card .hub-copy{padding:18px}.hub-card h3{color:#063f31}.hub-card p{color:#36584c}.hub-kicker{color:#96721b}
+.hub-worksheets{background:linear-gradient(145deg,#eff8e8,#fffdf5)}.hub-workbooks{background:linear-gradient(145deg,#fff7dc,#fffdf6)}.hub-library{background:linear-gradient(145deg,#e4f5f7,#fffdf8)}.hub-videos{background:linear-gradient(145deg,#f0e8ff,#fffdf8)}.hub-activities{background:linear-gradient(145deg,#e8f7e7,#fffdf8)}.hub-tests{background:linear-gradient(145deg,#fff0e4,#fffdf8)}
+.hub-art{filter:saturate(.88)}.hub-button{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:9px 14px;text-decoration:none}
+.section,.portal-grid,.portal-lower-grid{scroll-margin-top:100px}
+.site-footer{background:linear-gradient(110deg,#003a2d,#00503b);border-top:3px solid #d8b44b;color:#fff5ce}.site-footer .footer-brand{color:#f5d66d}.site-footer small{color:#e5dfc4}
+@media(max-width:1100px){.landing-layout{grid-template-columns:minmax(0,1fr) 285px;gap:16px}.hub-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.main-nav a{padding:8px 9px;font-size:12px}}
+@media(max-width:820px){.landing-layout{grid-template-columns:1fr;grid-template-areas:"hero" "account"}.landing-layout>.hero{min-height:300px}.landing-layout>.account-entry-section{max-width:none}.account-entry-section .account-panel{height:auto}.hub-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.site-header{flex-wrap:wrap}.main-nav{order:3;width:100%;justify-content:center;flex-wrap:wrap}}
+@media(max-width:560px){.landing-layout,.resource-hub{width:calc(100% - 24px);margin-top:14px}.landing-layout>.hero{padding:25px 20px;min-height:0}.hero h1{font-size:clamp(2rem,9vw,3rem)}.hero-art{min-height:220px}.hub-grid{grid-template-columns:1fr 1fr;gap:10px}.hub-card .hub-copy{padding:13px}.hub-card h3{font-size:1rem}.hub-card p{font-size:.86rem}.hub-button{font-size:.75rem;padding:8px 10px}.brand{min-width:0}.brand-copy strong{font-size:10px!important}}
+
+/* === ELITE ACHIEVEMENT ACADEMY: emerald + gold dashboard === */
+:root{
+  --navy:#003a2d; --navy2:#002b22; --teal:#07523e;
+  --gold:#d9b64d; --gold-light:#ffe69a; --cream:#fffdf7;
+  --paper:#fffefa; --ink:#103d30; --muted:#5c7067;
+  --line:#e8dfc5; --shadow:0 12px 28px rgba(0,45,34,.12);
+}
+body{background:#fffdf7;color:#103d30}
+.site-header{
+  min-height:92px;height:auto; padding:10px clamp(16px,2.8vw,42px);
+  background:linear-gradient(110deg,#002d23,#004332 60%,#002b22)!important;
+  color:#fff9dd!important;border-bottom:3px solid #d9b64d!important;
+  box-shadow:0 5px 22px rgba(0,40,30,.16)!important;
+}
+.site-header .brand-copy strong,.site-header .brand-copy small,.site-header .brand-copy small b{color:#ffe69a!important}
+.site-header .brand-mark{background:#00392c!important;border-color:#d9b64d!important}
+.site-header .brand-mark img{mix-blend-mode:normal!important;object-fit:contain!important}
+.main-nav a{color:#fff5d0!important;border-radius:13px;font-weight:700}
+.main-nav a:hover,.main-nav a.active{background:linear-gradient(135deg,#e9c85c,#fff0b1)!important;color:#00382a!important}
+.header-actions button{color:#ffe69a!important}
+.menu-toggle{border-color:#d9b64d!important}
+.landing-layout{align-items:stretch;gap:22px}
+.hero{
+  background:linear-gradient(125deg,#002c22 0%,#004a36 62%,#003126 100%)!important;
+  border:1px solid rgba(217,182,77,.8)!important;border-radius:20px!important;
+  color:#fffdf0!important;box-shadow:0 14px 28px rgba(0,50,35,.17)!important;
+}
+.hero h1,.hero h1 span{color:#ffe17a!important}
+.hero .eyebrow,.hero-proof{color:#fff0b7!important}
+.hero .button{background:linear-gradient(120deg,#e7c34c,#ffec9e)!important;color:#06392b!important;border:0!important}
+.hero .button-outline{background:transparent!important;color:#fff4c4!important;border:1px solid #e7c34c!important}
+.hero-art .art-card{background:linear-gradient(145deg,#064735,#00291f)!important;border-color:#d9b64d!important;color:#ffe9a4!important;box-shadow:0 16px 35px #001c1580!important}
+.hero-art .art-topline,.hero-art .art-small{color:#ffe9a4!important}
+.account-entry-section .account-panel,.account-panel{
+  border:1px solid #e5d7a8!important;border-radius:20px!important;
+  box-shadow:0 10px 26px rgba(0,55,39,.12)!important;background:#fffefa!important;
+}
+.account-panel-heading{background:linear-gradient(115deg,#003b2c,#00513b)!important;color:#fff4c6!important;border-bottom:2px solid #d9b64d!important}
+.account-panel-heading h3,.account-panel-heading .eyebrow{color:#ffe69a!important}
+.account-entry-heading .eyebrow,.hub-heading .eyebrow{color:#98751b!important}
+.account-entry-heading h2,.hub-heading h2{color:#064533!important}
+.button,.hub-button{background:linear-gradient(120deg,#e4c04b,#ffeb9a)!important;color:#07392b!important;border-color:#d9b64d!important}
+.resource-hub{margin-top:24px}
+.hub-heading{margin-bottom:18px}
+.hub-card{border-radius:20px!important;border-width:1px!important;box-shadow:0 8px 20px rgba(12,60,42,.09)!important}
+.hub-worksheets,.hub-activities{background:linear-gradient(145deg,#e4f7e2,#fffdf5)!important;border-color:#a8ddb1!important}
+.hub-workbooks,.hub-tests{background:linear-gradient(145deg,#fff6d9,#fffdf6)!important;border-color:#efd57b!important}
+.hub-library{background:linear-gradient(145deg,#def4f7,#fffdf8)!important;border-color:#8fd5e7!important}
+.hub-videos{background:linear-gradient(145deg,#f0e6ff,#fffdf8)!important;border-color:#c9b0f5!important}
+.hub-card h3{color:#063f31!important}
+.site-footer{background:linear-gradient(110deg,#002f24,#00503a)!important;border-top:3px solid #d9b64d!important;color:#fff4c6!important}
+.site-footer .footer-brand{color:#ffe69a!important}
+/* The duplicated feature strip was removed from index.html; keep no empty gap. */
+.stats-strip{display:none!important}
+@media(max-width:820px){.site-header{gap:10px}.landing-layout{gap:16px}.main-nav{background:#003a2d!important}.main-nav a{color:#fff3c7!important}}
+@media(max-width:560px){.site-header{padding:10px 12px}.hero{border-radius:16px!important}.resource-hub{margin-top:18px}}
