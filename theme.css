@@ -238,3 +238,16 @@ button:disabled{cursor:not-allowed;opacity:.65;transform:none!important;}
   .dialog-actions{display:flex;flex-direction:column;}
   .dialog-actions .button{width:100%;}
 }
+
+/* Fase 5: estados de cuestionarios y paneles ocultos */
+.hidden { display: none !important; }
+
+/* Diseño adaptable para cuestionarios y resultados */
+@media (max-width: 640px) {
+  .practice-section { grid-template-columns: minmax(0, 1fr); padding: 36px 16px; gap: 24px; }
+  .quiz-card { box-sizing: border-box; width: 100%; min-width: 0; padding: 20px 16px; }
+  .answer-list { grid-template-columns: minmax(0, 1fr); }
+  .quiz-footer { align-items: flex-start; flex-wrap: wrap; }
+  .quiz-footer button { max-width: 100%; }
+  .quiz-card h3 { font-size: clamp(20px, 6vw, 24px); overflow-wrap: anywhere; }
+}
