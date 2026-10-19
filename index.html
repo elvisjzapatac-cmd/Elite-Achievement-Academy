@@ -17,28 +17,30 @@
   <script src="phase4.js" defer></script>
 
   <link rel="stylesheet" href="k5-reference-match.css">
+  <link rel="stylesheet" href="k5-user-styles.css">
+
+  <script defer>document.addEventListener('DOMContentLoaded',function(){const input=document.getElementById('worksheetSearch');const button=document.getElementById('worksheetSearchButton');function searchWorksheets(){const term=(input?.value||'').trim().toLowerCase();const cards=[...document.querySelectorAll('#worksheets .worksheet-card')];cards.forEach(card=>{card.hidden=!!term&&!card.textContent.toLowerCase().includes(term)});document.getElementById('worksheets')?.scrollIntoView({behavior:'smooth'});}button?.addEventListener('click',searchWorksheets);input?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();searchWorksheets();}});});</script>
+
 </head>
 <body>
-  <header class="site-header" id="top">
-    <a class="brand" href="#home" aria-label="Elite Achievement Academy, inicio">
-      <span class="brand-mark" aria-label="Elite Achievement Academy"></span>
-      <span class="brand-copy"><strong>ELITE ACHIEVEMENT ACADEMY</strong><small>LEARN · PRACTICE · ACHIEVE</small></span>
-    </a>
-    <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
-      <a href="#home" data-i18n="navHome">Inicio</a>
-      <a href="#subjects" data-i18n="navSubjects">Materias</a>
-      <a href="#worksheets" data-i18n="navWorksheets">Fichas</a>
-      <a href="#library" data-i18n="navLibrary">Biblioteca</a>
-      <a href="#practice" data-i18n="navPractice">Práctica</a>
-      <a href="#portal" data-i18n="navPortal">Portal</a>
-      <a href="#account" data-i18n="navAccount">Cuenta</a>
-    </nav>
-    <div class="header-actions">
-      <a class="k5-account-link k5-signup" href="#account">Crear cuenta</a>
-      <a class="k5-account-link k5-login" href="#account">Iniciar sesión</a>
-      <button class="text-button language-switch" id="languageToggle" aria-label="Cambiar idioma">EN</button>
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  <header class="k5-header" id="top">
+    <div class="k5-header-top">
+      <a class="k5-logo-container" href="#home" aria-label="Elite Achievement Academy Home">
+        <span class="k5-logo"><span class="k5-text-k">E</span><span class="k5-text-5">A</span><span class="k5-text-learning"> Learning</span></span>
+        <span class="k5-tagline">Learn · Practice · Achieve</span>
+      </a>
+      <span class="k5-promo-badge">✦ Free Learning Resources</span>
+      <div class="k5-header-actions">
+        <a href="#account" class="k5-btn k5-btn-signup">Sign Up</a>
+        <a href="#account" class="k5-btn k5-btn-login">Log In</a>
+        <div class="k5-search-bar"><input id="worksheetSearch" type="search" placeholder="Search Worksheets" aria-label="Search Worksheets"><button id="worksheetSearchButton" type="button" aria-label="Search">🔍</button></div>
+        <button class="text-button language-switch" id="languageToggle" aria-label="Cambiar idioma">EN</button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      </div>
     </div>
+    <nav class="k5-nav" id="mainNav" aria-label="Main navigation">
+      <a href="#subjects">Math</a><a href="#subjects">Reading</a><a href="#subjects">Kindergarten</a><a href="#worksheets">Vocabulary</a><a href="#worksheets">Spelling</a><a href="#worksheets">Grammar &amp; Writing</a><a href="#subjects">Science</a><a href="#worksheets">Cursive</a><span class="k5-nav-divider">|</span><a href="#library" class="k5-bookstore-link">Bookstore</a>
+    </nav>
   </header>
 
   <main>
@@ -55,49 +57,20 @@
       </section>
     </section>
 
-    <section class="hero" id="home">
-      <div class="hero-content">
-        <p class="eyebrow" data-i18n="heroEyebrow">TU CAMINO HACIA LA EXCELENCIA</p>
-        <h1 data-i18n="heroTitle">Desbloquea tu <span>potencial académico</span></h1>
-        <p class="hero-lead" data-i18n="heroLead">Construye confianza con práctica guiada, recursos educativos y actividades para cada etapa.</p>
-        <div class="hero-actions">
-          <a href="#subjects" class="button" data-i18n="exploreSubjects">Explorar materias <span>→</span></a>
-          <a href="#practice" class="button button-outline" data-i18n="startPracticing">Empezar a practicar <span>→</span></a>
-        </div>
-        <div class="hero-proof"><span class="proof-icon">✦</span><span data-i18n="heroProof">Aprende a tu ritmo. Celebra cada avance.</span></div>
-      </div>
-      <div class="hero-art" aria-label="Academic study illustration">
-        <div class="art-glow"></div>
-        <div class="art-card">
-          <div class="art-topline"><span>ACADEMY • 2026</span><span>✦</span></div>
-          <div class="art-book">✧</div>
-          <div class="art-quote" data-i18n="artQuote">El conocimiento abre puertas.</div>
-          <div class="art-rule"></div>
-          <div class="art-small">LEARN · PRACTICE · ACHIEVE</div>
-        </div>
-        <div class="floating-note note-one"><span>✓</span><div><b data-i18n="noteProgress">¡Buen progreso!</b><small data-i18n="noteKeepGoing">Sigue así</small></div></div>
-        <div class="floating-note note-two"><span>★</span><div><b>+10 XP</b><small data-i18n="noteCompleted">Actividad completada</small></div></div>
-      </div>
+    <section class="k5-hero" id="home">
+      <div class="k5-hero-text"><h1>FREE WORKSHEETS</h1><p>Reading, math and more for<br>Preschool to Secondary School</p></div>
+      <div class="k5-hero-art" aria-label="Educational worksheet illustration"><div class="k5-sheet-graphic"><div class="k5-sheet-cat">🐱</div><div class="k5-sheet-line"></div><div class="k5-sheet-line"></div></div></div>
+    </section>
+    <section class="k5-cards-container" id="learning-hub" aria-label="Learning resources">
+      <article class="k5-card k5-card-orange"><h2>Worksheets</h2><div class="k5-card-preview"><div class="k5-preview-paper">A B C<br>1 2 3<br>✓ ✓ ○</div><div class="k5-preview-paper">READ<br>AND<br>LEARN</div></div><a href="#worksheets" class="k5-card-btn btn-orange">BROWSE</a></article>
+      <article class="k5-card k5-card-green"><h2>Workbooks</h2><div class="k5-card-preview"><div class="k5-preview-book">Math<br><br>1 + 2 = 3</div><div class="k5-preview-book">Reading<br><br>ABC</div></div><a href="#worksheets" class="k5-card-btn btn-green">EXPLORE</a></article>
+      <article class="k5-card k5-card-blue"><h2>Membership</h2><div class="k5-card-preview"><div class="k5-membership-logo"><span class="k5-abstract-figure">✦</span></div></div><a href="#account" class="k5-card-btn btn-blue">LEARN MORE</a></article>
+    </section>
+    <section class="k5-featured-container" aria-label="Featured learning resources">
+      <a class="k5-featured-box" href="#worksheets"><div class="k5-featured-thumb k5-sheet-thumb">📄</div><div class="k5-featured-info"><span class="featured-kicker">FEATURED WORKSHEET</span><h3>Read &amp; Recall</h3><p>Reading comprehension worksheet.</p></div></a>
+      <a class="k5-featured-box" href="#worksheets"><div class="k5-featured-thumb k5-book-thumb">📘</div><div class="k5-featured-info"><span class="featured-kicker">FEATURED WORKBOOK</span><h3>Add &amp; Subtract</h3><p>Practice math skills by level.</p></div></a>
     </section>
     </div>
-
-    
-    <section class="resource-hub" id="learning-hub">
-      <div class="hub-heading">
-        <p class="eyebrow" data-i18n="hubEyebrow">TU ESPACIO DE APRENDIZAJE</p>
-        <h2 data-i18n="hubTitle">¿Qué quieres aprender hoy?</h2>
-        <p data-i18n="hubDesc">Entra en cada apartado y descubre recursos preparados para ti.</p>
-      </div>
-      <div class="hub-grid">
-        <article class="hub-card hub-worksheets"><div class="hub-art" aria-hidden="true"><span class="paper paper-one">A B C<br>1 2 3</span><span class="paper paper-two">✓ ✎<br>★ ☆</span></div><div class="hub-copy"><span class="hub-kicker" data-i18n="hubTagPrint">PRACTICA E IMPRIME</span><h3 data-i18n="hubWorksheets">Worksheets</h3><p data-i18n="hubWorksheetsDesc">Fichas para resolver en pantalla o imprimir en casa.</p><a class="hub-button" href="#worksheets" data-i18n="hubBrowse">BROWSE ↗</a></div></article>
-        <article class="hub-card hub-workbooks"><div class="hub-art" aria-hidden="true"><span class="workbook workbook-one">MATH<br><b>1 + 2</b></span><span class="workbook workbook-two">READING<br><b>ABC</b></span></div><div class="hub-copy"><span class="hub-kicker" data-i18n="hubTagStudy">APRENDE PASO A PASO</span><h3 data-i18n="hubWorkbooks">Workbooks</h3><p data-i18n="hubWorkbooksDesc">Cuadernos y colecciones de ejercicios por materia.</p><a class="hub-button" href="#worksheets" data-i18n="hubExplore">EXPLORE ↗</a></div></article>
-        <article class="hub-card hub-library"><div class="hub-art" aria-hidden="true"><span class="book-spine spine-one"></span><span class="book-spine spine-two"></span><span class="book-spine spine-three"></span><span class="book-pages">Aa</span></div><div class="hub-copy"><span class="hub-kicker" data-i18n="hubTagRead">LEE Y DESCUBRE</span><h3 data-i18n="hubLibrary">Digital Library</h3><p data-i18n="hubLibraryDesc">Explora libros y cuentos de fuentes digitales.</p><a class="hub-button" href="#library" data-i18n="hubBrowse">BROWSE ↗</a></div></article>
-        <article class="hub-card hub-videos"><div class="hub-art" aria-hidden="true"><span class="video-screen"><span>▶</span></span><span class="video-star">✦</span></div><div class="hub-copy"><span class="hub-kicker" data-i18n="hubTagWatch">MIRA Y APRENDE</span><h3 data-i18n="hubVideos">Videos</h3><p data-i18n="hubVideosDesc">Lecciones visuales para repasar temas escolares.</p><a class="hub-button" href="#portal" data-i18n="hubExplore">EXPLORE ↗</a></div></article>
-        <article class="hub-card hub-activities"><div class="hub-art" aria-hidden="true"><span class="puzzle-piece">✦</span><span class="puzzle-circle">✓</span><span class="puzzle-block">Aa</span></div><div class="hub-copy"><span class="hub-kicker" data-i18n="hubTagPlay">APRENDE JUGANDO</span><h3 data-i18n="hubActivities">Activities</h3><p data-i18n="hubActivitiesDesc">Actividades interactivas para practicar habilidades.</p><a class="hub-button" href="#worksheets" data-i18n="hubStart">START ↗</a></div></article>
-        <article class="hub-card hub-tests"><div class="hub-art" aria-hidden="true"><span class="test-sheet"><b>QUIZ</b><i>✓</i><i>✓</i><i>○</i></span><span class="test-pencil">✎</span></div><div class="hub-copy"><span class="hub-kicker" data-i18n="hubTagCheck">COMPRUEBA LO QUE SABES</span><h3 data-i18n="hubTests">Tests & Quizzes</h3><p data-i18n="hubTestsDesc">Responde preguntas y comprueba tus conocimientos.</p><a class="hub-button" href="#practice" data-i18n="hubTakeTest">TAKE A TEST ↗</a></div></article>
-        <article class="hub-card hub-progress"><div class="hub-art" aria-hidden="true"><span class="progress-bars"><i></i><i></i><i></i><i></i></span><span class="progress-star">★</span></div><div class="hub-copy"><span class="hub-kicker" data-i18n="hubTagGoals">CADA PASO CUENTA</span><h3 data-i18n="hubProgress">My Progress</h3><p data-i18n="hubProgressDesc">Consulta tus puntos y continúa avanzando.</p><a class="hub-button" href="#portal" data-i18n="hubViewProgress">VIEW PROGRESS ↗</a></div></article>
-      </div>
-    </section>
 
     <section class="section section-light" id="subjects">
       <div class="section-heading">
